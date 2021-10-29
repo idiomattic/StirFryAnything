@@ -1,7 +1,11 @@
-@import "./styles/example.scss";
+// @import "./styles/example.scss";
 
-$myBlue: blue;
+// $myBlue: blue;
 
-#main {
-  color: $myBlue;
+// #main {
+//   color: $myBlue;
+// }
+
+.game-canvas {
+  border: 1px solid black;
 }

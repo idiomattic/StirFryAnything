@@ -5,7 +5,11 @@
 // #main {
 //   color: $myBlue;
 // }
+body {
+  margin: 0;
+}
 
-.game-canvas {
-  border: 1px solid black;
+#game-canvas {
+  background-color: black;
+  border: 10px solid green; //just to clearly see...
 }

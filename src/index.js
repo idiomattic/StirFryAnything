@@ -1,14 +1,11 @@
-// import Example from "./scripts/example";
+import Game from './scripts/game'
+import Star from './scripts/space'
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   console.log("Hello world");
-//   const main = document.getElementById("main");
-//   new Example(main);
-// })
-
-const canvas = document.querySelector(".game-canvas");
+const canvas = document.getElementById("game-canvas");
 const context = canvas.getContext('2d');
+// export {canvas, context}
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = 900;
+canvas.height = 600;
 
+new Game(canvas, context);

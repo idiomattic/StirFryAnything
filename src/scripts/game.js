@@ -9,27 +9,28 @@ export default class Game {
 
   startGame() {
 
-    this.star = new Star(this.ctx, [50, 50], 10)
+    // this.star = new Star(this.ctx, [50, 50], 10)
     this.render()
   }
   
   render() {
-    this.star.drawStars(this.ctx)
-    this.generateStars()
+    // context is canvas object here and within forEach
+    const startStars = this.generateStars();
+    startStars.forEach((star) => {
+      star.drawStars(this.ctx);
+    })
   }
 
   generateStars() {
     const stars = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       let posish = generateStarPosish.call(this.ctx)
-      stars.push(new Star(this.ctx, posish, 10))
+      stars.push(new Star(this.ctx, posish, (5 + 10 * Math.random())))
     }
-    console.log(stars)
+    return(stars)
   }
 
 }
-
-const stars = [];
 
 function generateStarPosish() {
   let width = this.canvas.width;
@@ -38,15 +39,11 @@ function generateStarPosish() {
   let x = null;
   let y = null;
   if (bigRandy < 0.5) {
-    // want random x in bounds of 20%-80% canvas box
     x = (width  * 0.2) + (width * 0.6) * Math.random();
-    // want y fixed to top or bottom
     let littleRandy = Math.random();
     y = littleRandy < 0.5 ? height * 0.2 : height * 0.8;
   } else {
-    // want random y in bounds of canvas box
     y = (height  * 0.2) + (height * 0.6) * Math.random();
-    // want x fixed to left or right
     let littleRandy = Math.random();
     x = littleRandy < 0.5 ? width * 0.2 : width * 0.8;
   }

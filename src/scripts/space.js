@@ -12,10 +12,10 @@ const COLORS = [
 
 //think Star Wars lightspeed but toned down
 export default class Star {
-  constructor(context, x, y, size) {
+  constructor(context, posish, size) {
     this.context = context;
-    this.x = x;
-    this.y = y;
+    this.x = posish[0];
+    this.y = posish[1];
     this.size = size;
     this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
     //take a random float btw 0 and 1, multiply by length of color arr, 

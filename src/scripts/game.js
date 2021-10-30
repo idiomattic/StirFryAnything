@@ -14,6 +14,24 @@ export default class Game {
   
   render() {
     this.star.drawStars(this.ctx)
+    generateStars.call(this.ctx);
   }
+
+}
+
+const stars = [];
+
+function generateStars() {
+  let x = Math.random() < 0.5 ? 1 : 2;
+  let y = Math.random() < 0.5 ? 1 : 2
+  console.log(this);
+  // setInterval(() => {
+  //   stars.push(new Star(
+  //     this.ctx,
+  //     x,
+  //     y,
+  //     size
+  //   ))
+  // }, 100)
 }
 

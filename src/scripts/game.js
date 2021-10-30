@@ -8,12 +8,12 @@ export default class Game {
   }
 
   startGame() {
-    this.star = new Star(this.ctx, 50, 50, 150, 'red')
+    this.star = new Star(this.ctx, 50, 50, 10)
     this.render()
   }
   
   render() {
-    this.star.animate(this.ctx)
+    this.star.drawStars(this.ctx)
   }
 }
 

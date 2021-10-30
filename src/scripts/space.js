@@ -1,4 +1,3 @@
-// import {canvas as mainCanvas, context as mainContext} from "../index"
 const COLORS = [
   'FFFFFF',
   'F5F5F5',
@@ -11,25 +10,21 @@ const COLORS = [
   'F0FFFF'
 ]
 
-
 //think Star Wars lightspeed but toned down
 export default class Star {
-  constructor(context, x, y, size, color) {
+  constructor(context, x, y, size) {
     this.context = context;
     this.x = x;
     this.y = y;
     this.size = size;
-    this.color = color;
+    this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    //take a random float btw 0 and 1, multiply by length of color arr, 
+    //truncate, and index into color arr
   }
 
-  animate(ctx) {
-    this.drawStar(ctx);
-  }
-  
-  drawStar(ctx) {
-    console.log(ctx)
-
-    ctx.fillStyle = `${this.color}`;
+  //arg ctx comes from this.ctx in game.js
+  drawStars(ctx) {
+    ctx.fillStyle = '#' + `${this.color}` //needs # !!!!!!!!!
     ctx.fillRect(50, 50, this.size, this.size);
   }
 

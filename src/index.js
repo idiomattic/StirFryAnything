@@ -7,5 +7,7 @@ const context = canvas.getContext('2d');
 
 canvas.width = 900;
 canvas.height = 600;
+const center = [canvas.width / 2, canvas.height / 2]
+
 
 new Game(canvas, context);

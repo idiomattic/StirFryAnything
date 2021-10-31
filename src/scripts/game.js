@@ -15,15 +15,15 @@ export default class Game {
   
   render() {
     // context is canvas object here and within forEach
-    const startStars = this.generateStars();
+    const startStars = this.generateStars(100);
     startStars.forEach((star) => {
       star.drawStars(this.ctx);
     })
   }
 
-  generateStars() {
+  generateStars(n) {
     const stars = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < n; i++) {
       let posish = generateStarPosish.call(this.ctx)
       stars.push(new Star(this.ctx, posish, (5 + 10 * Math.random())))
     }

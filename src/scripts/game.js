@@ -15,7 +15,7 @@ export default class Game {
   
   render() {
     // context is canvas object here and within forEach
-    const startStars = this.generateStars(100);
+    const startStars = this.generateStars(50);
     startStars.forEach((star) => {
       star.drawStars(this.ctx);
     })
@@ -48,15 +48,5 @@ function generateStarPosish() {
     x = littleRandy < 0.5 ? width * 0.2 : width * 0.8;
   }
   return [x, y]
-
-  // local ctx is the canvas
-  // setInterval(() => {
-  //   stars.push(new Star(
-  //     this.ctx,
-  //     x,
-  //     y,
-  //     size
-  //   ))
-  // }, 100)
 }
 

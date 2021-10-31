@@ -15,7 +15,8 @@ const COLORS = [
   'E5FAFA'
 ]
 
-//think Star Wars lightspeed but toned down
+const stars = [];
+
 export default class Star {
   constructor(context, posish, size) {
     this.context = context;
@@ -30,7 +31,7 @@ export default class Star {
   drawStar(ctx) {
     ctx.fillStyle = '#' + `${this.color}`
     ctx.fillRect(this.x, this.y, this.size, this.size);
-    // this.generateStarPosish()
+    console.log(this.x, this.y)
   }
   
   generateStarPosish() {
@@ -47,23 +48,48 @@ export default class Star {
       x = Math.random() < 0.5 ? width * 0.2 : width * 0.8;
     }
     return [x, y];
-    console.log(this);
   }
   
+  generateVelo() {
+    let centerX = this.context.width / 2;
+    let centerY = this.context.height / 2;
+    this.angle = Math.atan((centerY - this.y) / (this.x - centerX)) * 180 / Math.PI;
+  }
 
   generateStars(n) {
-    const stars = [];
     for (let i = 0; i < n; i++) {
       let posish = Star.prototype.generateStarPosish.bind(this)();
-      stars.push(new Star(this.canvas, posish, (5 + 10 * Math.random())))
+      let newStar = new Star(this.canvas, posish, (5 + 10 * Math.random()));
+      newStar.generateVelo();
+      stars.push(newStar);
     }
-    return stars;
+    stars.forEach((star) => {
+      star.drawStar(this.ctx);
+    }, this);
+    console.log('drew it once')
   }
   
-  static render() {
-    const startStars = Star.prototype.generateStars.bind(this)(10);
-    startStars.forEach((star) => {
+  move() {
+    // requestAnimationFrame(move);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    // debugger
+    stars.forEach((star) => {
+      let speed = Math.random() * 50;
+      star.x = star.x + Math.cos(star.angle) * speed;
+      star.y = star.y + Math.sin(star.angle) * speed;
       star.drawStar(this.ctx);
+      console.log('drew it a second time')
     }, this)
+
+  }
+
+  static render() {
+    Star.prototype.generateStars.bind(this)(1);
+    Star.prototype.move.bind(this)();
+    // setInterval(
+    //   Star.prototype.move.bind(this)(),
+    //   Star.
+    // )
+    
   }
 }

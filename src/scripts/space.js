@@ -71,7 +71,7 @@ export default class Star {
   }
 
   updatePos() {
-    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     stars.forEach((star) => {
       let speed = Math.random() * 50;
       star.x = star.x + Math.cos(star.angle) * speed;
@@ -89,7 +89,7 @@ export default class Star {
   }
 
   static render() {
-    Star.prototype.generateStars.bind(this)(1);
+    Star.prototype.generateStars.bind(this)(10);
     Star.prototype.move.bind(this)();
     // setInterval(Star.prototype.move.bind(this)(), 1000)
     

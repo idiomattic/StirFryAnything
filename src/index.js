@@ -9,5 +9,9 @@ canvas.width = 900;
 canvas.height = 600;
 const center = [canvas.width / 2, canvas.height / 2]
 
+addEventListener('load', start);
 
-new Game(canvas, context);
+function start() {
+  const game = new Game(canvas, context);
+  
+}

@@ -98,7 +98,7 @@ export default class Star {
   updatePos() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     stars.forEach((star) => {
-      let speed = Math.random() * 5;
+      let speed = Math.random();
       if (star.angle >= 0 && star.angle < 90) {
         star.x = star.x + Math.cos(star.angle) * speed;
         star.y = star.y - Math.sin(star.angle) * speed;
@@ -123,7 +123,11 @@ export default class Star {
   }
 
   static render() {
-    Star.prototype.generateStars.bind(this)(100);
+    Star.prototype.generateStars.bind(this)(50);
     Star.prototype.move.bind(this)();    
+    setInterval(() => {
+      Star.prototype.generateStars.bind(this)(50);
+      Star.prototype.move.bind(this)();
+    }, 1000)
   }
 }

@@ -29,6 +29,7 @@ export default class Star {
   
   //arg ctx comes from this.ctx in game.js
   drawStar(ctx) {
+    ctx.beginPath();
     ctx.fillStyle = '#' + `${this.color}`
     ctx.fillRect(this.x, this.y, this.size, this.size);
     console.log(this.x, this.y)
@@ -68,11 +69,9 @@ export default class Star {
     }, this);
     console.log('drew it once')
   }
-  
-  move() {
-    // requestAnimationFrame(move);
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    // debugger
+
+  updatePos() {
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     stars.forEach((star) => {
       let speed = Math.random() * 50;
       star.x = star.x + Math.cos(star.angle) * speed;
@@ -80,16 +79,19 @@ export default class Star {
       star.drawStar(this.ctx);
       console.log('drew it a second time')
     }, this)
-
+  }
+  
+  move() {
+    // debugger
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    Star.prototype.updatePos.bind(this)();
+    // requestAnimationFrame(Star.prototype.move);
   }
 
   static render() {
     Star.prototype.generateStars.bind(this)(1);
     Star.prototype.move.bind(this)();
-    // setInterval(
-    //   Star.prototype.move.bind(this)(),
-    //   Star.
-    // )
+    // setInterval(Star.prototype.move.bind(this)(), 1000)
     
   }
 }

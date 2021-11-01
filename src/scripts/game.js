@@ -1,4 +1,5 @@
 import Star from './space'
+import printer from '../index'
 
 export default class Game {
   constructor(canvas, context) {
@@ -9,12 +10,21 @@ export default class Game {
 
   startGame() {
     this.render()
-    const ingredients = [];
-    
+    this.level = 1;
+    window.addEventListener('keypress', (key) => {
+      if (key.key === "Enter") {
+        this.level1();
+      }
+    }, false)
   }
   
   render() {
     Star.render.bind(this)();
+  }
+
+  level1() {
+    debugger
+    printer('Please select ingredients to cook!')
   }
 
 }

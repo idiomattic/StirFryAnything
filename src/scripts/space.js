@@ -22,6 +22,7 @@ export default class Star {
     this.context = context;
     this.x = posish[0];
     this.y = posish[1];
+    this.speed = 0;
     this.size = size;
     this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
     
@@ -98,36 +99,39 @@ export default class Star {
   updatePos() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     stars.forEach((star) => {
-      let speed = Math.random();
+      star.speed = 0.1 * Math.random();
       if (star.angle >= 0 && star.angle < 90) {
-        star.x = star.x + Math.cos(star.angle) * speed;
-        star.y = star.y - Math.sin(star.angle) * speed;
+        star.x = star.x + Math.cos(star.angle) * star.speed;
+        star.y = star.y - Math.sin(star.angle) * star.speed;
       } else if (star.angle >= 90 && star.angle < 180) {
-        star.x = star.x + Math.cos(star.angle) * speed;
-        star.y = star.y - Math.sin(star.angle) * speed;
+        star.x = star.x + Math.cos(star.angle) * star.speed;
+        star.y = star.y - Math.sin(star.angle) * star.speed;
       } else if (star.angle < 0 && star.angle >= -90) {
-        star.x = star.x + Math.cos(star.angle) * speed;
-        star.y = star.y - Math.sin(star.angle) * speed;
+        star.x = star.x + Math.cos(star.angle) * star.speed;
+        star.y = star.y - Math.sin(star.angle) * star.speed;
       } else {
-        star.x = star.x + Math.cos(star.angle) * speed;
-        star.y = star.y - Math.sin(star.angle) * speed;
+        star.x = star.x + Math.cos(star.angle) * star.speed;
+        star.y = star.y - Math.sin(star.angle) * star.speed;
+      }
+      if (star.x < 0 || star.x > this.canvas.width || star.y < 0 || star.y > this.canvas.height) {
+        stars.splice(stars.indexOf(star), 1);
       }
       star.drawStar(this.ctx);
     }, this)
   }
   
   move() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     Star.prototype.updatePos.bind(this)();
     requestAnimationFrame(Star.prototype.move.bind(this));
   }
 
   static render() {
-    Star.prototype.generateStars.bind(this)(50);
+    Star.prototype.generateStars.bind(this)(10);
     Star.prototype.move.bind(this)();    
     setInterval(() => {
-      Star.prototype.generateStars.bind(this)(50);
+      Star.prototype.generateStars.bind(this)(5 + Math.random()*10);
       Star.prototype.move.bind(this)();
-    }, 1000)
+    }, 1500 + Math.random()*1000)
   }
 }

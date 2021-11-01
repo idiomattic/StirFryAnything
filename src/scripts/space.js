@@ -81,10 +81,6 @@ export default class Star {
         this.angle = Math.atan((centerY - this.y) / (this.x - centerX));
       }
     }
-    console.log(`x: ${this.x}`)
-    console.log(`y: ${this.y}`)
-    console.log(`angle: ${this.angle * 180 / Math.PI}`)
-
   }
 
   generateStars(n) {

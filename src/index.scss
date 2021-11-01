@@ -9,6 +9,31 @@ body {
   margin: 0;
 }
 
+h1, h3 {
+  text-align: center;
+}
+
+h1 {
+  font-family: renogare;
+  font-weight: 100;
+}
+
+h3 {
+  font-family: renogare;
+  font-weight: 40;
+}
+
+@font-face {
+  font-family: 'renogare';
+  src: url(../fonts/Renogare-Regular.otf);
+  font-style: normal;
+  font-weight: 100;
+}
+
 #game-canvas {
   background-color: black;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }

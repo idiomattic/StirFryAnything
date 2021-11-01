@@ -9,6 +9,7 @@ export default class Game {
 
   startGame() {
     this.render()
+    
   }
   
   render() {

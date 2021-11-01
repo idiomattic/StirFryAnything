@@ -13,7 +13,7 @@ const COLORS = [
   '00CDCD',
   '79CDCD',
   'E5FAFA'
-]
+];
 
 const stars = [];
 
@@ -32,7 +32,8 @@ export default class Star {
     ctx.beginPath();
     ctx.fillStyle = '#' + `${this.color}`
     ctx.fillRect(this.x, this.y, this.size, this.size);
-    console.log(this.x, this.y)
+    // console.log(`x: ${this.x}`)
+    // console.log(`y: ${this.y}`)
   }
   
   generateStarPosish() {
@@ -52,9 +53,38 @@ export default class Star {
   }
   
   generateVelo() {
-    let centerX = this.context.width / 2;
-    let centerY = this.context.height / 2;
-    this.angle = Math.atan((centerY - this.y) / (this.x - centerX)) * 180 / Math.PI;
+    const centerX = this.context.width / 2;
+    const centerY = this.context.height / 2;
+
+    if (this.y === this.context.height * 0.2) { // spawn on top
+      if (this.x < centerX) { //TLT
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX)) + Math.PI;
+      } else { //TRT
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX));
+      }
+    } else if (this.y === this.context.height * 0.8) { // spawn on bottom
+      if (this.x < centerX) { //BLB
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX)) - Math.PI;
+      } else { //BRB
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX));
+      }
+    } else if (this.x === this.context.width * 0.2) { // spawn on left
+      if (this.y < centerY) { //TLL
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX)) + Math.PI;
+      } else { //BLL
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX)) - Math.PI;
+      }
+    } else { // spawn on right
+      if (this.y < centerY) { //TRR
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX));
+      } else { //BRR
+        this.angle = Math.atan((centerY - this.y) / (this.x - centerX));
+      }
+    }
+    console.log(`x: ${this.x}`)
+    console.log(`y: ${this.y}`)
+    console.log(`angle: ${this.angle * 180 / Math.PI}`)
+
   }
 
   generateStars(n) {
@@ -67,31 +97,37 @@ export default class Star {
     stars.forEach((star) => {
       star.drawStar(this.ctx);
     }, this);
-    console.log('drew it once')
   }
 
   updatePos() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     stars.forEach((star) => {
-      let speed = Math.random() * 50;
-      star.x = star.x + Math.cos(star.angle) * speed;
-      star.y = star.y + Math.sin(star.angle) * speed;
+      let speed = Math.random() * 5;
+      if (star.angle >= 0 && star.angle < 90) {
+        star.x = star.x + Math.cos(star.angle) * speed;
+        star.y = star.y - Math.sin(star.angle) * speed;
+      } else if (star.angle >= 90 && star.angle < 180) {
+        star.x = star.x + Math.cos(star.angle) * speed;
+        star.y = star.y - Math.sin(star.angle) * speed;
+      } else if (star.angle < 0 && star.angle >= -90) {
+        star.x = star.x + Math.cos(star.angle) * speed;
+        star.y = star.y - Math.sin(star.angle) * speed;
+      } else {
+        star.x = star.x + Math.cos(star.angle) * speed;
+        star.y = star.y - Math.sin(star.angle) * speed;
+      }
       star.drawStar(this.ctx);
-      console.log('drew it a second time')
     }, this)
   }
   
   move() {
-    // debugger
-    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     Star.prototype.updatePos.bind(this)();
-    // requestAnimationFrame(Star.prototype.move);
+    requestAnimationFrame(Star.prototype.move.bind(this));
   }
 
   static render() {
-    Star.prototype.generateStars.bind(this)(10);
-    Star.prototype.move.bind(this)();
-    // setInterval(Star.prototype.move.bind(this)(), 1000)
-    
+    Star.prototype.generateStars.bind(this)(100);
+    Star.prototype.move.bind(this)();    
   }
 }

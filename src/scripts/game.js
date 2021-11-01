@@ -1,5 +1,5 @@
 import Star from './space'
-import printer from '../index'
+import {printer} from '../index'
 
 export default class Game {
   constructor(canvas, context) {
@@ -23,8 +23,8 @@ export default class Game {
   }
 
   level1() {
-    debugger
-    printer('Please select ingredients to cook!')
+    let firstDirs = printer('Please select ingredients to cook!')
+    console.log(firstDirs)
   }
 
 }

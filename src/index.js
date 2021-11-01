@@ -18,13 +18,13 @@ function start() {
 }
 
 export function printer(message) {
-  if (text) {
-    text.remove();
-  }
+  let existingDiv = document.querySelector('#game-container>div');
+  if (existingDiv) {existingDiv.remove()};
   const container = document.getElementById('game-container');
   let text = document.createElement('div');
   text.innerHTML = message;
   container.appendChild(text);
+  return text;
 }
 
 function hello() {

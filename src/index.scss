@@ -2,25 +2,18 @@ body {
   margin: 0;
 }
 
-h1, h3 {
+h1, h3 { //header and footer
   text-align: center;
 }
 
-h1 {
+h1 { //header
   font-family: renogare;
   font-weight: 100;
 }
 
-h3 {
+h3 { //footer
   font-family: renogare;
   font-weight: 40;
-}
-
-p {
-  color: white;
-  background-color: transparent;
-  font-family: renogare;
-  font-weight: 30;
 }
 
 @font-face {
@@ -39,37 +32,56 @@ p {
 }
 
 #game-container {
+  left: 50%;
+  transform: translate(-50%);
+  width: fit-content;
+  height: fit-content;
   position: relative;
 }
 
-#game-container ul {
+ul.veggieList, ul.proteinList {
   display: flex;
   list-style: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+ul.proteinList {
+  top: 30%;
+  left: 50%;
+}
+
+ul.veggieList {
   top: 50%;
   left: 50%;
-  position: absolute;
-  // background-color: transparent;
 }
 
-#protein-pics li {
+.proteinList li, .veggieList li {
+  width: 200px;
+  height: auto;
   flex: auto;
   background-color: transparent;
   top: 30%;
 }
 
-#veggie-pics li {
-  flex: auto;
-  background-color: transparent;
-  top: 30%;
+li > img {
+  max-width:100%;
+  max-height:100%;
+}
+
+#tray-pic {
+  width: 300px;
+  height: auto;
 }
 
 #tray {
-  width: fit-content;
-  height: fit-content;
+  display: inline-block;
   background-color: transparent;
   position: absolute;
-  right: 30%;
-  bottom: 30%;
+  right: 50%;
+  bottom: 20%;
+  transform: translate(+50%);
 }
 
 #message {

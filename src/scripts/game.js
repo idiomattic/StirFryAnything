@@ -26,8 +26,8 @@ export default class Game {
 
   level1() {
     if (this.level !== 1) { this.startGame() };
-    let firstDirs = printer('Select ingredients to cook!')
-    firstDirs.style.top = "25%";
+    let firstDirs = printer('Click ingredients to add them to your tray')
+    firstDirs.style.top = "23%";
     const container = document.getElementById('game-container');
     this.buildTray(container)
     this.buildLists(container);
@@ -39,6 +39,7 @@ export default class Game {
     trayDiv.setAttribute('id', 'tray');
     const trayPic = document.createElement('img');
     trayPic.setAttribute('src', 'images/sheet_pan.PNG');
+    trayPic.setAttribute('id', 'tray-pic');
     trayDiv.appendChild(trayPic);
     const chosenIngredients = document.createElement('ul');
     chosenIngredients.setAttribute('id', 'chosen-ingredients');

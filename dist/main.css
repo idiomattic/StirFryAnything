@@ -1,6 +1,12 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
+@font-face {
+  font-family: "renogare";
+  src: url(../fonts/Renogare-Regular.otf);
+  font-style: normal;
+  font-weight: 100;
+}
 body {
   margin: 0;
 }
@@ -19,12 +25,6 @@ h3 {
   font-weight: 40;
 }
 
-@font-face {
-  font-family: "renogare";
-  src: url(../fonts/Renogare-Regular.otf);
-  font-style: normal;
-  font-weight: 100;
-}
 #game-canvas {
   background-color: black;
   padding: 0;
@@ -41,7 +41,7 @@ h3 {
   position: relative;
 }
 
-ul.veggieList, ul.proteinList {
+ul#veggieList, ul#proteinList {
   display: flex;
   list-style: none;
   position: absolute;
@@ -49,17 +49,15 @@ ul.veggieList, ul.proteinList {
   transform: translate(-50%);
 }
 
-ul.proteinList {
+ul#proteinList {
   top: 27%;
-  left: 50%;
 }
 
-ul.veggieList {
+ul#veggieList {
   top: 40%;
-  left: 50%;
 }
 
-.proteinList li, .veggieList li {
+#proteinList li, #veggieList li {
   width: 100px;
   height: auto;
   flex: auto;
@@ -78,12 +76,28 @@ li > img {
 }
 
 #tray {
-  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
   background-color: transparent;
   position: absolute;
   right: 50%;
   bottom: 20%;
   transform: translate(50%, 50%);
+}
+
+#chosen-ingredients {
+  display: flex;
+  list-style: none;
+  position: absolute;
+}
+
+#tray li {
+  display: inline-block;
+  width: 40px;
+  height: auto;
+  flex: auto;
+  background-color: transparent;
 }
 
 #message {

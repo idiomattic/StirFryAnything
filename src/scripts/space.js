@@ -116,6 +116,7 @@ export default class Star {
       if (star.x < 0 || star.x > this.canvas.width || star.y < 0 || star.y > this.canvas.height) {
         stars.splice(stars.indexOf(star), 1);
       }
+      star.size += 0.07 * star.speed;
       star.drawStar(this.ctx);
     }, this)
   }
@@ -127,7 +128,6 @@ export default class Star {
 
   static render() {
     Star.prototype.generateStars.bind(this)(10);
-    Star.prototype.move.bind(this)();
     setInterval(() => {
       Star.prototype.generateStars.bind(this)(5 + Math.random()*10);
       Star.prototype.move.bind(this)();

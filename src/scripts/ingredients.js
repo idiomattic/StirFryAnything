@@ -5,24 +5,43 @@ export class Ingredient {
     this.state = state;
     this.raw_img_link = raw_img_link;
     this.prepped_img_link = prepped_img_link;
-    let rawImage = new Image();
-    
-    rawImage.src = this.raw_img_link;
-
-    this.raw_img = rawImage;
-    let preppedImage = new Image();
-    
-    preppedImage.src = this.prepped_img_link;
-    this.prepped_img = preppedImage;
   }
 
-  render(ctx) {
-    ctx.drawImage(this.raw_img, 600, 400)
+  render(canvas, context) {
+    const vegList = document.getElementById("veggie-pics")
+    const proList = document.getElementById("protein-pics")
+    if (this.state === 'Raw') {
+      let ingrEle = document.createElement('li');
+      ingrEle.setAttribute('id', `${this.name}`);
+      let ingrImg = document.createElement('img');
+      ingrImg.setAttribute('src', `${this.raw_img_link}`);
+      ingrImg.setAttribute('alt', `${this.name}`);
+      ingrEle.appendChild(ingrImg);
+      debugger
+      if (this.category === 'Vegetable') {
+        vegList.appendChild(ingrEle);
+      } else {
+        proList.appendChild(ingrEle);
+      };
+      // let rawImage = new Image();
+      // rawImage.addEventListener('load', (e) => {
+      //   context.drawImage(rawImage, 600, 400)
+      //   console.log('drew raw ingredient image')
+      // }, false)
+      // rawImage.src = this.raw_img_link;
+    } //else {
+    //   let preppedImage = new Image();
+    //   preppedImage.addEventListener('load', function() {
+    //     context.drawImage(preppedImage, 600, 400)
+    //     console.log('drew prepped ingredient image')
+    //   }, false)
+    //   preppedImage.src = this.prepped_img_link;
+    // }
   }
 
 }
 
-const INGREDIENTS = [
+export const INGREDIENTS = [
   new Ingredient('Beef', 'Protein', 'Raw', 'images/raw_beef.PNG', 'images/prepped_beef.PNG'),
   new Ingredient('Bell Pepper', 'Vegetable', 'Raw', 'images/raw_bell_pepper.PNG', 'images/prepped_bell_pepper.PNG'),
   new Ingredient('Broccoli', 'Vegetable', 'Raw', 'images/raw_broccoli.PNG', 'images/prepped_broccoli.PNG'),

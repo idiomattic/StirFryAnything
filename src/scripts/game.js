@@ -1,6 +1,6 @@
 import Star from './space'
 import {printer} from '../index'
-import {proteins, vegetables} from './ingredients';
+import {INGREDIENTS, proteins, vegetables} from './ingredients';
 
 export default class Game {
   constructor(canvas, context) {
@@ -25,7 +25,7 @@ export default class Game {
 
   level1() {
     if (this.level !== 1) { this.startGame() };
-    let firstDirs = printer('Please select ingredients to cook!')
+    let firstDirs = printer('Select ingredients to cook!')
     firstDirs.style.top = "25%";
 
     // this.buildLists();
@@ -33,10 +33,8 @@ export default class Game {
   }
 
   renderIngredients() {
-    vegetables.forEach((veggie) => {
-      // debugger
-      veggie.render(this.ctx);
-      console.log('drew image')
+    INGREDIENTS.forEach((ingredient) => {
+      ingredient.render(this.canvas, this.ctx);
     }, this)
   }
 

@@ -5,16 +5,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./dist/main.css" />
-  <script type="text/javascript" src="./dist/main.js" defer></script> <!-- defer ensures the DOM is loaded before scripts run -->
+  <script type="text/javascript" src="./dist/main.js" defer></script>
+  <link class="raw" rel="preload" href="./images/raw_beef.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_bell_pepper.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_broccoli.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_chicken.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_chiles.PNG="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_garlic.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_ginger.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_pork.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_red_onion.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_scallion.PNG" as="image"></link>
+  <link class="raw" rel="preload" href="./images/raw_snap_peas.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_beef.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_bell_pepper.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_broccoli.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_chicken.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_chiles.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_garlic.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_ginger.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_pork.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_red_onion.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_scallion.PNG" as="image"></link>
+  <link class="prepped" rel="preload" href="./images/prepped_snap_peas.PNG" as="image"></link>
+  <link class="completed" rel="preload" href="./images/completed_beef.jpg" as="image"></link>
+  <link class="completed" rel="preload" href="./images/completed_chicken.jpg" as="image"></link>
+  <link class="completed" rel="preload" href="./images/completed_pork.jpg" as="image"></link>
+  
   <title>Stir Fry Anything</title>
 </head>
 <body>
   <h1>Stir Fry Anything</h1>
   <div id="game-container">
     <canvas id="game-canvas"></canvas>
+    <ul id="veggie-pics" type="hidden"></ul>
+    <ul id="protein-pics" type="hidden"></ul>
   </div>
   <h3>
-    <a href="https://github.com/matthewlese">Github</a>
+    <a href="https://github.com/matthewlese">GitHub</a>
     <a href="https://www.linkedin.com/in/matthewlese/">LinkedIn</a>
   </h3>
 </body>

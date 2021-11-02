@@ -1,11 +1,25 @@
 export class Ingredient {
-  constructor(name, category, state, raw_img, prepped_img) {
+  constructor(name, category, state, raw_img_link, prepped_img_link) {
     this.name = name;
     this.category = category;
     this.state = state;
-    this.raw_img = raw_img;
-    this.prepped_img = prepped_img;
+    this.raw_img_link = raw_img_link;
+    this.prepped_img_link = prepped_img_link;
+    let rawImage = new Image();
+    
+    rawImage.src = this.raw_img_link;
+
+    this.raw_img = rawImage;
+    let preppedImage = new Image();
+    
+    preppedImage.src = this.prepped_img_link;
+    this.prepped_img = preppedImage;
   }
+
+  render(ctx) {
+    ctx.drawImage(this.raw_img, 600, 400)
+  }
+
 }
 
 const INGREDIENTS = [
@@ -21,15 +35,6 @@ const INGREDIENTS = [
   new Ingredient('Scallion', 'Vegetable', 'Raw', 'images/raw_scallion.PNG', 'images/prepped_scallion.PNG'),
   new Ingredient('Snap Peas', 'Vegetable', 'Raw', 'images/raw_snap_peas.PNG', 'images/prepped_snap_peas.PNG')  
 ]
-
-INGREDIENTS.forEach((ingredient) => {
-  let rawImage = new Image();
-  rawImage.src = ingredient.raw_img;
-  ingredient.raw_img = rawImage;
-  let preppedImage = new Image();
-  preppedImage.src = ingredient.prepped_img;
-  ingredient.prepped_img = preppedImage;
-})
 
 export const proteins = INGREDIENTS.filter(ingredient => ingredient.category === 'Protein');
 export const vegetables = INGREDIENTS.filter(ingredient => ingredient.category === 'Vegetable');

@@ -45,6 +45,13 @@ p {
   position: relative;
 }
 
+#game-container ul {
+  list-style: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
 #game-container > div {
   top: 50%;
   left: 50%;

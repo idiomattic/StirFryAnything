@@ -28,35 +28,44 @@ export default class Game {
     let firstDirs = printer('Please select ingredients to cook!')
     firstDirs.style.top = "25%";
 
-    this.buildLists();
+    // this.buildLists();
+    this.renderIngredients();
   }
 
-  buildLists() {
-    const container = document.getElementById('game-container');
-    let veggieList = document.createElement('ul');
-    veggieList.setAttribute('class', 'veggieList');
+  renderIngredients() {
     vegetables.forEach((veggie) => {
-      let veggieEl = document.createElement('li');
-      veggieEl.setAttribute('id', `${veggie.name}`);
-      let veggieImg = document.createElement('img');
-      veggieImg.setAttribute('src', `${veggie.raw_img}`);
-      veggieImg.setAttribute('alt', `${veggie.name}`);
-      veggieEl.appendChild(veggieImg);
-      veggieList.appendChild(veggieEl);
-    })
-    container.appendChild(veggieList);
-
-    let proteinList = document.createElement('ul');
-    proteinList.setAttribute('class', 'proteinList');
-    proteins.forEach((protein) => {
-      let proteinEl = document.createElement('li');
-      proteinEl.setAttribute('id', `${protein.name}`);
-      let proteinImg = document.createElement('img');
-      proteinImg.setAttribute('src', `${protein.raw_img}`);
-      proteinImg.setAttribute('alt', `${protein.name}`);
-      proteinEl.appendChild(proteinImg);
-      proteinList.appendChild(proteinEl);
-    })
-    container.appendChild(proteinList);
+      // debugger
+      veggie.render(this.ctx);
+      console.log('drew image')
+    }, this)
   }
+
+  // buildLists() {
+  //   const container = document.getElementById('game-container');
+  //   let veggieList = document.createElement('ul');
+  //   veggieList.setAttribute('class', 'veggieList');
+  //   vegetables.forEach((veggie) => {
+  //     let veggieEl = document.createElement('li');
+  //     veggieEl.setAttribute('id', `${veggie.name}`);
+  //     let veggieImg = document.createElement('img');
+  //     veggieImg.setAttribute('src', `${veggie.raw_img_link}`);
+  //     veggieImg.setAttribute('alt', `${veggie.name}`);
+  //     veggieEl.appendChild(veggieImg);
+  //     veggieList.appendChild(veggieEl);
+  //   })
+  //   container.appendChild(veggieList);
+
+  //   let proteinList = document.createElement('ul');
+  //   proteinList.setAttribute('class', 'proteinList');
+  //   proteins.forEach((protein) => {
+  //     let proteinEl = document.createElement('li');
+  //     proteinEl.setAttribute('id', `${protein.name}`);
+  //     let proteinImg = document.createElement('img');
+  //     proteinImg.setAttribute('src', `${protein.raw_img_link}`);
+  //     proteinImg.setAttribute('alt', `${protein.name}`);
+  //     proteinEl.appendChild(proteinImg);
+  //     proteinList.appendChild(proteinEl);
+  //   })
+  //   container.appendChild(proteinList);
+  // }
 }

@@ -121,14 +121,13 @@ export default class Star {
   }
   
   move() {
-    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     Star.prototype.updatePos.bind(this)();
     requestAnimationFrame(Star.prototype.move.bind(this));
   }
 
   static render() {
     Star.prototype.generateStars.bind(this)(10);
-    Star.prototype.move.bind(this)();    
+    Star.prototype.move.bind(this)();
     setInterval(() => {
       Star.prototype.generateStars.bind(this)(5 + Math.random()*10);
       Star.prototype.move.bind(this)();

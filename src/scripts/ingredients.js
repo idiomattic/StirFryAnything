@@ -8,35 +8,7 @@ export class Ingredient {
   }
 
   render(canvas, context) {
-    const vegList = document.getElementById("veggie-pics")
-    const proList = document.getElementById("protein-pics")
-    if (this.state === 'Raw') {
-      let ingrEle = document.createElement('li');
-      ingrEle.setAttribute('id', `${this.name}`);
-      let ingrImg = document.createElement('img');
-      ingrImg.setAttribute('src', `${this.raw_img_link}`);
-      ingrImg.setAttribute('alt', `${this.name}`);
-      ingrEle.appendChild(ingrImg);
-      debugger
-      if (this.category === 'Vegetable') {
-        vegList.appendChild(ingrEle);
-      } else {
-        proList.appendChild(ingrEle);
-      };
-      // let rawImage = new Image();
-      // rawImage.addEventListener('load', (e) => {
-      //   context.drawImage(rawImage, 600, 400)
-      //   console.log('drew raw ingredient image')
-      // }, false)
-      // rawImage.src = this.raw_img_link;
-    } //else {
-    //   let preppedImage = new Image();
-    //   preppedImage.addEventListener('load', function() {
-    //     context.drawImage(preppedImage, 600, 400)
-    //     console.log('drew prepped ingredient image')
-    //   }, false)
-    //   preppedImage.src = this.prepped_img_link;
-    // }
+    
   }
 
 }

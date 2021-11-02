@@ -33,8 +33,8 @@ export default class Game {
   }
 
   renderIngredients() {
-    INGREDIENTS.forEach((ingredient) => {
-      ingredient.render(this.canvas, this.ctx);
+    vegetables.forEach((vegetable) => {
+      vegetable.render(this.ctx);
     }, this)
   }
 

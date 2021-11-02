@@ -46,6 +46,21 @@ export default class Game {
     trayDiv.appendChild(chosenIngredients);
     container.appendChild(trayDiv);
   }
+
+  togglePos() {
+    const chosenList = document.querySelector('#chosen-ingredients');
+    const parent = this.classList.contains('Vegetable') ? 
+      document.querySelector('.veggieList') : document.querySelector('.proteinList');
+    if (!this.classList.contains('chosen')) {
+      parent.removeChild(this);
+      this.classList.toggle('chosen');
+      chosenList.appendChild(this);
+    } else {
+      chosenList.removeChild(this);
+      this.classList.toggle('chosen');
+      parent.appendChild(this);
+    }
+  }
       
   buildLists(container) {
     // const container = document.getElementById('game-container');
@@ -53,23 +68,29 @@ export default class Game {
     veggieList.setAttribute('class', 'veggieList');
     vegetables.forEach((veggie) => {
       let veggieEl = document.createElement('li');
+      veggieEl.setAttribute('class', `${veggie.category}`)
       veggieEl.setAttribute('id', `${veggie.name}`);
       let veggieImg = document.createElement('img');
       veggieImg.setAttribute('src', `${veggie.raw_img_link}`);
       veggieImg.setAttribute('alt', `${veggie.name}`);
+      veggieImg.addEventListener('click', this.togglePos.bind(veggieEl)());
       veggieEl.appendChild(veggieImg);
       veggieList.appendChild(veggieEl);
     })
     container.appendChild(veggieList);
-
+    
     let proteinList = document.createElement('ul');
     proteinList.setAttribute('class', 'proteinList');
     proteins.forEach((protein) => {
       let proteinEl = document.createElement('li');
+      proteinEl.setAttribute('class', `${protein.category}`)
       proteinEl.setAttribute('id', `${protein.name}`);
       let proteinImg = document.createElement('img');
       proteinImg.setAttribute('src', `${protein.raw_img_link}`);
       proteinImg.setAttribute('alt', `${protein.name}`);
+      proteinImg.addEventListener('click', function(e) {
+        console.log('clicked prot');
+      });
       proteinEl.appendChild(proteinImg);
       proteinList.appendChild(proteinEl);
     })

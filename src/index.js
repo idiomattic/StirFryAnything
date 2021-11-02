@@ -5,8 +5,8 @@ const canvas = document.getElementById("game-canvas");
 const context = canvas.getContext('2d');
 // export {canvas, context}
 
-canvas.width = 900;
-canvas.height = 600;
+canvas.width = 1200;
+canvas.height = 800;
 const center = [canvas.width / 2, canvas.height / 2]
 
 addEventListener('load', start);
@@ -28,5 +28,5 @@ export function printer(message) {
 }
 
 function hello() {
-  printer('Press Enter to Begin')  
+  printer('Press Enter to Begin')
 }

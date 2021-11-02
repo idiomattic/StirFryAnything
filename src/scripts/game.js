@@ -1,5 +1,6 @@
 import Star from './space'
 import {printer} from '../index'
+import {proteins, vegetables} from './ingredients';
 
 export default class Game {
   constructor(canvas, context) {
@@ -23,8 +24,39 @@ export default class Game {
   }
 
   level1() {
+    if (this.level !== 1) { this.startGame() };
     let firstDirs = printer('Please select ingredients to cook!')
-    console.log(firstDirs)
+    firstDirs.style.top = "25%";
+
+    this.buildLists();
   }
 
+  buildLists() {
+    const container = document.getElementById('game-container');
+    let veggieList = document.createElement('ul');
+    veggieList.setAttribute('class', 'veggieList');
+    vegetables.forEach((veggie) => {
+      let veggieEl = document.createElement('li');
+      veggieEl.setAttribute('id', `${veggie.name}`);
+      let veggieImg = document.createElement('img');
+      veggieImg.setAttribute('src', `${veggie.raw_img}`);
+      veggieImg.setAttribute('alt', `${veggie.name}`);
+      veggieEl.appendChild(veggieImg);
+      veggieList.appendChild(veggieEl);
+    })
+    container.appendChild(veggieList);
+
+    let proteinList = document.createElement('ul');
+    proteinList.setAttribute('class', 'proteinList');
+    proteins.forEach((protein) => {
+      let proteinEl = document.createElement('li');
+      proteinEl.setAttribute('id', `${protein.name}`);
+      let proteinImg = document.createElement('img');
+      proteinImg.setAttribute('src', `${protein.raw_img}`);
+      proteinImg.setAttribute('alt', `${protein.name}`);
+      proteinEl.appendChild(proteinImg);
+      proteinList.appendChild(proteinEl);
+    })
+    container.appendChild(proteinList);
+  }
 }

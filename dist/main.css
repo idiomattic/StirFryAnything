@@ -24,7 +24,6 @@ p {
   background-color: transparent;
   font-family: renogare;
   font-weight: 30;
-  -webkit-text-stroke-color: turquoise;
 }
 
 @font-face {
@@ -46,13 +45,35 @@ p {
 }
 
 #game-container ul {
+  display: flex;
   list-style: none;
   top: 50%;
   left: 50%;
   position: absolute;
 }
 
-#game-container > div {
+#protein-pics li {
+  flex: auto;
+  background-color: transparent;
+  top: 30%;
+}
+
+#veggie-pics li {
+  flex: auto;
+  background-color: transparent;
+  top: 30%;
+}
+
+#tray {
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  position: absolute;
+  right: 30%;
+  bottom: 30%;
+}
+
+#message {
   top: 50%;
   left: 50%;
   position: absolute;

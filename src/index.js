@@ -10,23 +10,9 @@ canvas.height = 800;
 const center = [canvas.width / 2, canvas.height / 2]
 
 addEventListener('load', start);
+// addEventListener('DOMContentLoaded', start);
 
 function start() {
   let inIntro = true;
   const game = new Game(canvas, context);
-  hello();
-}
-
-export function printer(message) {
-  let existingDiv = document.querySelector('#game-container>div');
-  if (existingDiv) {existingDiv.remove()};
-  const container = document.getElementById('game-container');
-  let text = document.createElement('div');
-  text.innerHTML = message;
-  container.appendChild(text);
-  return text;
-}
-
-function hello() {
-  printer('Press Enter to Begin')
 }

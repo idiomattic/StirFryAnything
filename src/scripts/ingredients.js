@@ -7,10 +7,6 @@ export class Ingredient {
     this.prepped_img_link = prepped_img_link;
   }
 
-  render(canvas, context) {
-    
-  }
-
 }
 
 export const INGREDIENTS = [

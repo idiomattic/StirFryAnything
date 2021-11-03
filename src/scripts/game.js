@@ -167,7 +167,8 @@ export default class Game {
 
   removeL1Events() {
     const trayDiv = document.getElementById('tray');
-    trayDiv.removeEventListener('click', this.enterLevel2().bind(this));
+    debugger
+    trayDiv.removeEventListener('click', this.enterLevel2.bind(this));
     trayDiv.removeEventListener('mouseover', (e) => {
       trayDiv.style.backgroundColor = 'yellow';
       trayDiv.style.opacity = '0.5';
@@ -178,7 +179,7 @@ export default class Game {
     })
     let trayEls = document.getElementById('chosen-ingredients').getElementsByTagName('li');
     for (let i = 0; i < trayEls.length; i++) {
-      console.log(getEventListeners(trayEls[i]))
+      debugger
       trayEls[i].removeEventListener('click', this.togglePos.bind(this));
     }
   }

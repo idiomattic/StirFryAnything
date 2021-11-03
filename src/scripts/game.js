@@ -64,37 +64,34 @@ export default class Game {
   
 
   togglePos(e) {
-    const ingredientsArr = [];
+    // const ingredientsArr = [];
     const chosenList = document.querySelector('#chosen-ingredients');
     let parent = undefined;
-    let ingrInst = INGREDIENTS.filter(ingr => ingr.name === this.id);
-    if (this.classList.contains('Vegetable')) {
+    let eTarg = e.currentTarget;
+    let ingrInst = INGREDIENTS.filter(ingr => ingr.name === eTarg.id);
+    if (eTarg.classList.contains('Vegetable')) {
       parent = document.getElementById('veggieList');
     } else {
       parent = document.getElementById('proteinList');
     }
-    if (!this.classList.contains('chosen')) {
-      parent.removeChild(this);
-      this.classList.toggle('chosen');
-      if (this.classList.contains('Protein')) {
-        this.style.width = '100px';
+    if (!eTarg.classList.contains('chosen')) {
+      parent.removeChild(eTarg);
+      eTarg.classList.toggle('chosen');
+      if (eTarg.classList.contains('Protein')) {
+        eTarg.style.width = '100px';
       } else {
-        this.style.width = '40px';
+        eTarg.style.width = '40px';
       }
-      chosenList.appendChild(this);
-      // debugger
-      console.log(e.target)
-      console.log(e.currentTarget)
-      console.log(this)
-      ingredientsArr.push(ingrInst[0]);
-      console.log(ingredientsArr)
+      chosenList.appendChild(eTarg);
+      this.ingredientsArr.push(ingrInst[0]);
+      console.log(this.ingredientsArr)
     } else {
-      chosenList.removeChild(this);
-      ingredientsArr.splice(ingredientsArr.indexOf(ingrInst), 1);
-      console.log(ingredientsArr)
-      this.classList.toggle('chosen');
-      this.style.width = '100px';
-      parent.appendChild(this);
+      chosenList.removeChild(eTarg);
+      this.ingredientsArr.splice(this.ingredientsArr.indexOf(ingrInst), 1);
+      console.log(this.ingredientsArr)
+      eTarg.classList.toggle('chosen');
+      eTarg.style.width = '100px';
+      parent.appendChild(eTarg);
     }
   }
       
@@ -109,7 +106,7 @@ export default class Game {
       let veggieImg = document.createElement('img');
       veggieImg.setAttribute('src', `${veggie.raw_img_link}`);
       veggieImg.setAttribute('alt', `${veggie.name}`);
-      veggieEl.addEventListener('click', this.togglePos.bind(veggieEl));
+      veggieEl.addEventListener('click', this.togglePos.bind(this));
       veggieEl.appendChild(veggieImg);
       veggieList.appendChild(veggieEl);
     })
@@ -124,7 +121,7 @@ export default class Game {
       let proteinImg = document.createElement('img');
       proteinImg.setAttribute('src', `${protein.raw_img_link}`);
       proteinImg.setAttribute('alt', `${protein.name}`);
-      proteinImg.addEventListener('click', this.togglePos.bind(proteinEl));
+      proteinEl.addEventListener('click', this.togglePos.bind(this));
       proteinEl.appendChild(proteinImg);
       proteinList.appendChild(proteinEl);
     })

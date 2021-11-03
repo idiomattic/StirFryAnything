@@ -79,6 +79,7 @@ li > img { // images themselves can't be large than their divs
   display: flex;
   background-color: transparent;
   position: absolute;
+  border-radius: 15px;
   right: 50%;
   bottom: 20%;
   transform: translate(+50%, +50%);
@@ -110,4 +111,16 @@ li > img { // images themselves can't be large than their divs
   color: white;
   font-family: renogare;
   font-weight: 40;
+}
+
+#board-div {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  background-color: transparent;
+  position: absolute;
+  border-radius: 15px;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(+50%, +50%);
 }

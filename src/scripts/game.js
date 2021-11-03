@@ -53,10 +53,11 @@ export default class Game {
 
   level2() {
     this.level++;
-    console.log('in level 2');
-    debugger
-    if (this.level !== -1) { this.startGame() };
+    // debugger
+    if (this.level !== 2) { this.startGame() };
+    this.removeL1Events();
     this.removeLists();
+    this.placeBoard();
     printer('Choose ingredients from your tray to begin preparing.')
   }
 
@@ -71,13 +72,25 @@ export default class Game {
     chosenIngredients.setAttribute('id', 'chosen-ingredients');
     trayDiv.appendChild(chosenIngredients);
     container.appendChild(trayDiv);
-    trayDiv.addEventListener('mouseover', (e) => {
-      trayDiv.style.backgroundColor = 'yellow';
-    })
-    trayDiv.addEventListener('mouseout', (e) => {
-      trayDiv.style.backgroundColor = 'transparent';
-    })
-    trayDiv.addEventListener('click', this.level2(), { once: true })
+    setTimeout(() => {
+      trayDiv.addEventListener('mouseover', (e) => {
+        trayDiv.style.backgroundColor = 'yellow';
+        trayDiv.style.opacity = '0.5';
+      })
+      trayDiv.addEventListener('mouseout', (e) => {
+        trayDiv.style.backgroundColor = 'transparent';
+        trayDiv.style.opacity = '1';
+      })
+    }, 8000)
+    // debugger
+    trayDiv.addEventListener('click', this.enterLevel2.bind(this))
+    // debugger
+  }
+
+  enterLevel2() {
+    const chosenIngredients = document.getElementById('chosen-ingredients');
+    // debugger
+    if (chosenIngredients.getElementsByTagName('li').length > 1) {this.level2()};
   }
   
 
@@ -150,5 +163,35 @@ export default class Game {
     const proList = document.getElementById('proteinList');
     container.removeChild(vegList);
     container.removeChild(proList);
+  }
+
+  removeL1Events() {
+    const trayDiv = document.getElementById('tray');
+    trayDiv.removeEventListener('click', this.enterLevel2().bind(this));
+    trayDiv.removeEventListener('mouseover', (e) => {
+      trayDiv.style.backgroundColor = 'yellow';
+      trayDiv.style.opacity = '0.5';
+    })
+    trayDiv.removeEventListener('mouseout', (e) => {
+      trayDiv.style.backgroundColor = 'transparent';
+      trayDiv.style.opacity = '1';
+    })
+    let trayEls = document.getElementById('chosen-ingredients').getElementsByTagName('li');
+    for (let i = 0; i < trayEls.length; i++) {
+      console.log(getEventListeners(trayEls[i]))
+      trayEls[i].removeEventListener('click', this.togglePos.bind(this));
+    }
+  }
+  
+  placeBoard() {
+    const container = document.getElementById('game-container');
+    let boardDiv = document.createElement('div');
+    container.appendChild(boardDiv);
+    boardDiv.setAttribute('id', 'board-div')
+    let boardImg = document.createElement('img');
+    boardImg.setAttribute('src', 'images/cutting_board.png');
+    boardImg.setAttribute('alt', 'cutting board');
+    const ingr = document.createElement('img');
+    boardDiv.appendChild(ingr);
   }
 }

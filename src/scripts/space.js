@@ -99,7 +99,7 @@ export default class Star {
   updatePos() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     stars.forEach((star) => {
-      star.speed = 0.1 * Math.random();
+      star.speed = 0.05 * Math.random();
       if (star.angle >= 0 && star.angle < 90) {
         star.x = star.x + Math.cos(star.angle) * star.speed;
         star.y = star.y - Math.sin(star.angle) * star.speed;

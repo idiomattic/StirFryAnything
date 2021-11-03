@@ -1,5 +1,5 @@
 import Star from './space'
-import printer from './util'
+import {printer, printer2} from './util'
 import {INGREDIENTS, proteins, vegetables} from "./ingredients"
 
 export default class Game {
@@ -12,7 +12,8 @@ export default class Game {
 
   startGame() {
     this.render()
-    printer('Press Enter to Begin')
+    let hello = printer('Press Enter to Begin')
+    hello.style.top = "50%";
     this.level = 1;
     window.addEventListener('keypress', (key) => {
       if (key.key === "Enter") {
@@ -27,8 +28,10 @@ export default class Game {
 
   level1() {
     if (this.level !== 1) { this.startGame() };
-    let firstDirs = printer('Click ingredients to add them to your tray');
-    firstDirs.style.top = "23%";
+    printer('Click ingredients to add them to your tray');
+    setTimeout(function(){printer('and click again to remove them.')}, 8000)
+    setTimeout(function(){printer('Click your tray to advance when ready.')}, 15000)
+
     const container = document.getElementById('game-container');
     this.buildTray(container)
     let lists = this.buildLists(container);
@@ -48,6 +51,15 @@ export default class Game {
     // }
   }
 
+  level2() {
+    this.level++;
+    console.log('in level 2');
+    debugger
+    if (this.level !== -1) { this.startGame() };
+    this.removeLists();
+    printer('Choose ingredients from your tray to begin preparing.')
+  }
+
   buildTray(container) {
     const trayDiv = document.createElement('div');
     trayDiv.setAttribute('id', 'tray');
@@ -59,7 +71,13 @@ export default class Game {
     chosenIngredients.setAttribute('id', 'chosen-ingredients');
     trayDiv.appendChild(chosenIngredients);
     container.appendChild(trayDiv);
-    
+    trayDiv.addEventListener('mouseover', (e) => {
+      trayDiv.style.backgroundColor = 'yellow';
+    })
+    trayDiv.addEventListener('mouseout', (e) => {
+      trayDiv.style.backgroundColor = 'transparent';
+    })
+    trayDiv.addEventListener('click', this.level2(), { once: true })
   }
   
 
@@ -84,11 +102,9 @@ export default class Game {
       }
       chosenList.appendChild(eTarg);
       this.ingredientsArr.push(ingrInst[0]);
-      console.log(this.ingredientsArr)
     } else {
       chosenList.removeChild(eTarg);
       this.ingredientsArr.splice(this.ingredientsArr.indexOf(ingrInst), 1);
-      console.log(this.ingredientsArr)
       eTarg.classList.toggle('chosen');
       eTarg.style.width = '100px';
       parent.appendChild(eTarg);
@@ -126,5 +142,13 @@ export default class Game {
       proteinList.appendChild(proteinEl);
     })
     return [veggieList, proteinList];
+  }
+
+  removeLists() {
+    const container = document.getElementById('game-container');
+    const vegList = document.getElementById('veggieList');
+    const proList = document.getElementById('proteinList');
+    container.removeChild(vegList);
+    container.removeChild(proList);
   }
 }

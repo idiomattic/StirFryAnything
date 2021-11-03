@@ -90,6 +90,7 @@ li > img {
   display: flex;
   list-style: none;
   position: absolute;
+  column-count: auto;
 }
 
 #tray li {

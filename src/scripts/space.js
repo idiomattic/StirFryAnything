@@ -131,8 +131,8 @@ export default class Star {
     Star.prototype.move.bind(this)();
     // requestAnimationFrame(this.render);
     setInterval(() => {
-      Star.prototype.generateStars.bind(this)(5 + Math.random()*10);
+      Star.prototype.generateStars.bind(this)(1 + Math.random()*10);
       Star.prototype.move.bind(this)();
-    }, 1500 + Math.random()*1000)
+    }, 300 + Math.random()*1000)
   }
 }

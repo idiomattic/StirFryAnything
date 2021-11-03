@@ -23,8 +23,7 @@ h3 { //footer
   font-weight: 40;
 }
 
-
-#game-canvas {
+#game-canvas { //actual canvas
   background-color: black;
   padding: 0;
   margin-left: auto;
@@ -32,7 +31,7 @@ h3 { //footer
   display: block;
 }
 
-#game-container {
+#game-container { // contains canvas, lists, divs
   left: 50%;
   transform: translate(-50%);
   width: fit-content;
@@ -56,7 +55,7 @@ ul#veggieList {
   top: 40%;
 }
 
-#proteinList li, #veggieList li {
+#proteinList li, #veggieList li { // divs containing images
   width: 100px;
   height: auto;
   flex: auto;
@@ -64,7 +63,7 @@ ul#veggieList {
   top: 30%;
 }
 
-li > img {
+li > img { // images themselves can't be large than their divs
   max-width:100%;
   max-height:100%;
 }
@@ -74,7 +73,7 @@ li > img {
   height: auto;
 }
 
-#tray {
+#tray { // size by its image
   width: fit-content;
   height: fit-content;
   display: flex;
@@ -85,10 +84,13 @@ li > img {
   transform: translate(+50%, +50%);
 }
 
+
+
 #chosen-ingredients {
   display: flex;
   list-style: none;
   position: absolute;
+  column-count: auto;
 }
 
 #tray li {

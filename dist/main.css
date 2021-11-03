@@ -7,6 +7,10 @@
   font-style: normal;
   font-weight: 100;
 }
+img {
+  background-color: transparent;
+}
+
 body {
   margin: 0;
 }
@@ -131,14 +135,22 @@ li > img {
 }
 
 #board-list {
+  padding: 0;
+  margin: 0;
   list-style: none;
+  width: min-content;
+  height: min-content;
   position: absolute;
-  width: 90%;
-  margin: auto;
+  left: 55%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+}
+
+#board-list > li {
+  width: min-content;
+  height: auto;
 }
 
 li.chosen {
-  right: 52%;
-  bottom: 50%;
   height: auto;
 }

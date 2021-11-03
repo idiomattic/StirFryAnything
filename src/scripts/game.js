@@ -80,7 +80,7 @@ export default class Game {
       Game.prototype.removeL1Events();
       Game.prototype.placeBoard();
       this.boardOccupied = false;
-      Game.prototype.addL2Events();
+      Game.prototype.addL2Events.bind(this)();
       Game.prototype.level2.bind(this)();
     };
   }
@@ -183,14 +183,14 @@ export default class Game {
   addL2Events() {
     const trayEls = document.getElementById('chosen-ingredients').getElementsByTagName('li');
     for (let i = 0; i < trayEls.length; i++) {
-      trayEls[i].onclick = this.toggleToBoard.bind(trayEls[i]);
+      trayEls[i].onclick = this.toggleToBoard.bind(this);
     }
   }
   
   toggleToBoard() {
     const boardList = document.getElementById('board-list');
     const chosenList = document.getElementById('chosen-ingredients');
-    let eTarg = this;
+    let eTarg = event.currentTarget;
     if (!eTarg.classList.contains('onboard') && boardList.getElementsByTagName('li').length === 0) {
       chosenList.removeChild(eTarg);
       eTarg.classList.toggle('onboard');
@@ -199,17 +199,38 @@ export default class Game {
       } else {
         eTarg.style.width = '90px';
       }
-      boardList.appendChild(eTarg);
-    } else if (eTarg.classList.contains('onboard')) {
-      boardList.removeChild(eTarg);
-      eTarg.classList.toggle('onboard');
-      if (eTarg.classList.contains('Protein')) {
-        eTarg.style.width = '100px';
-      } else {
-        eTarg.style.width = '40px';
+      let that = this;
+      eTarg.onmouseover = function(e) {
+        // debugger
+        e.currentTarget.onmouseout = Game.prototype.prepareIngredient.bind(that);
       }
-      chosenList.appendChild(eTarg);
-    }
+      boardList.appendChild(eTarg);
+    } 
+    // else if (eTarg.classList.contains('onboard')) {
+    //   boardList.removeChild(eTarg);
+    //   eTarg.onmouseover = null;
+    //   eTarg.classList.toggle('onboard');
+    //   if (eTarg.classList.contains('Protein')) {
+    //     eTarg.style.width = '100px';
+    //   } else {
+    //     eTarg.style.width = '40px';
+    //   }
+    //   chosenList.appendChild(eTarg);
+    // }
+  }
+
+  prepareIngredient(e) {
+    const boardList = document.getElementById('board-list');
+    e.target.setAttribute('src', 'images/explosion.png');
+    e.target.style.width = '200px'
+    // setTimeout(Game.prototype.swapImage(e.target), 2000).bind(e.target)
+    setTimeout(Game.prototype.swapImage.bind(this)(), 2000)
+  }
+
+  swapImage(e) {
+    // e.currentTarget or event.currentTarget are the li
+    // this is the game isntance!!
+    debugger
   }
 
 

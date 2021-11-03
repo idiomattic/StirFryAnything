@@ -113,7 +113,7 @@ export default class Star {
         star.x = star.x + Math.cos(star.angle) * star.speed;
         star.y = star.y - Math.sin(star.angle) * star.speed;
       }
-      if (star.x < 0 || star.x > this.canvas.width || star.y < 0 || star.y > this.canvas.height) {
+      if (star.x < -star.size || star.x > this.canvas.width || star.y < -star.size || star.y > this.canvas.height) {
         stars.splice(stars.indexOf(star), 1);
       }
       star.size += 0.07 * star.speed;

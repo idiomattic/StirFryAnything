@@ -30,8 +30,11 @@ export default class Game {
     if (this.level !== 1) { this.startGame() };
     printer('Click ingredients to add them to your tray');
     setTimeout(function(){printer('and click again to remove them.')}, 8000)
-    setTimeout(function(){printer('Click your tray to advance when ready.')}, 15000)
-
+    setTimeout(function(){
+      printer('Click here to advance when ready.');
+      let advanceMessage = document.getElementById('message')
+      advanceMessage.addEventListener('click', Game.prototype.enterLevel2.bind(this))
+    }.bind(this), 15000)
     const container = document.getElementById('game-container');
     this.buildTray(container)
     let lists = this.buildLists(container);
@@ -53,11 +56,7 @@ export default class Game {
 
   level2() {
     this.level++;
-    // debugger
     if (this.level !== 2) { this.startGame() };
-    this.removeL1Events();
-    this.removeLists();
-    this.placeBoard();
     printer('Choose ingredients from your tray to begin preparing.')
   }
 
@@ -72,30 +71,20 @@ export default class Game {
     chosenIngredients.setAttribute('id', 'chosen-ingredients');
     trayDiv.appendChild(chosenIngredients);
     container.appendChild(trayDiv);
-    setTimeout(() => {
-      trayDiv.addEventListener('mouseover', (e) => {
-        trayDiv.style.backgroundColor = 'yellow';
-        trayDiv.style.opacity = '0.5';
-      })
-      trayDiv.addEventListener('mouseout', (e) => {
-        trayDiv.style.backgroundColor = 'transparent';
-        trayDiv.style.opacity = '1';
-      })
-    }, 8000)
-    // debugger
-    trayDiv.addEventListener('click', this.enterLevel2.bind(this))
-    // debugger
   }
 
   enterLevel2() {
     const chosenIngredients = document.getElementById('chosen-ingredients');
-    // debugger
-    if (chosenIngredients.getElementsByTagName('li').length > 1) {this.level2()};
+    if (chosenIngredients.getElementsByTagName('li').length > 1) {
+      Game.prototype.removeLists();
+      Game.prototype.removeL1Events();
+      Game.prototype.placeBoard();
+      Game.prototype.level2.bind(this)();
+    };
   }
   
 
   togglePos(e) {
-    // const ingredientsArr = [];
     const chosenList = document.querySelector('#chosen-ingredients');
     let parent = undefined;
     let eTarg = e.currentTarget;
@@ -135,7 +124,7 @@ export default class Game {
       let veggieImg = document.createElement('img');
       veggieImg.setAttribute('src', `${veggie.raw_img_link}`);
       veggieImg.setAttribute('alt', `${veggie.name}`);
-      veggieEl.addEventListener('click', this.togglePos.bind(this));
+      veggieEl.onclick = this.togglePos.bind(this);
       veggieEl.appendChild(veggieImg);
       veggieList.appendChild(veggieEl);
     })
@@ -150,7 +139,7 @@ export default class Game {
       let proteinImg = document.createElement('img');
       proteinImg.setAttribute('src', `${protein.raw_img_link}`);
       proteinImg.setAttribute('alt', `${protein.name}`);
-      proteinEl.addEventListener('click', this.togglePos.bind(this));
+      proteinEl.onclick = this.togglePos.bind(this);
       proteinEl.appendChild(proteinImg);
       proteinList.appendChild(proteinEl);
     })
@@ -166,21 +155,11 @@ export default class Game {
   }
 
   removeL1Events() {
-    const trayDiv = document.getElementById('tray');
-    debugger
-    trayDiv.removeEventListener('click', this.enterLevel2.bind(this));
-    trayDiv.removeEventListener('mouseover', (e) => {
-      trayDiv.style.backgroundColor = 'yellow';
-      trayDiv.style.opacity = '0.5';
-    })
-    trayDiv.removeEventListener('mouseout', (e) => {
-      trayDiv.style.backgroundColor = 'transparent';
-      trayDiv.style.opacity = '1';
-    })
+    console.log('in removeL1Events')
     let trayEls = document.getElementById('chosen-ingredients').getElementsByTagName('li');
     for (let i = 0; i < trayEls.length; i++) {
       debugger
-      trayEls[i].removeEventListener('click', this.togglePos.bind(this));
+      trayEls[i].onclick = null;
     }
   }
   
@@ -192,7 +171,13 @@ export default class Game {
     let boardImg = document.createElement('img');
     boardImg.setAttribute('src', 'images/cutting_board.png');
     boardImg.setAttribute('alt', 'cutting board');
-    const ingr = document.createElement('img');
-    boardDiv.appendChild(ingr);
+    const boardPic = document.createElement('img');
+    boardPic.setAttribute('src', 'images/cutting_board.png')
+    boardPic.setAttribute('id', 'board');
+    boardDiv.appendChild(boardPic);
   }
+
+  
+
+
 }

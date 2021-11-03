@@ -111,6 +111,7 @@ li > img {
   color: white;
   font-family: renogare;
   font-weight: 40;
+  font-size: 20px;
 }
 
 #board-div {
@@ -120,7 +121,13 @@ li > img {
   background-color: transparent;
   position: absolute;
   border-radius: 15px;
-  right: 50%;
+  right: 52%;
   bottom: 50%;
   transform: translate(50%, 50%);
+}
+
+#board {
+  width: 600px;
+  height: auto;
+  position: relative;
 }

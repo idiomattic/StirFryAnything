@@ -175,6 +175,9 @@ export default class Game {
     boardPic.setAttribute('src', 'images/cutting_board.png')
     boardPic.setAttribute('id', 'board');
     boardDiv.appendChild(boardPic);
+    const boardList = document.createElement('ul');
+    boardList.setAttribute('id', 'board-list');
+    boardDiv.appendChild(boardList);
   }
 
   addL2Events() {
@@ -185,20 +188,20 @@ export default class Game {
   }
   
   toggleToBoard() {
-    const board = document.getElementById('board-div');
+    const boardList = document.getElementById('board-list');
     const chosenList = document.getElementById('chosen-ingredients');
     let eTarg = this;
-    if (!eTarg.classList.contains('onboard') && board.getElementsByTagName('li').length === 0) {
+    if (!eTarg.classList.contains('onboard') && boardList.getElementsByTagName('li').length === 0) {
       chosenList.removeChild(eTarg);
       eTarg.classList.toggle('onboard');
       if (eTarg.classList.contains('Protein')) {
         eTarg.style.width = '150px';
       } else {
-        eTarg.style.width = '60px';
+        eTarg.style.width = '90px';
       }
-      board.appendChild(eTarg);
+      boardList.appendChild(eTarg);
     } else if (eTarg.classList.contains('onboard')) {
-      board.removeChild(eTarg);
+      boardList.removeChild(eTarg);
       eTarg.classList.toggle('onboard');
       if (eTarg.classList.contains('Protein')) {
         eTarg.style.width = '100px';

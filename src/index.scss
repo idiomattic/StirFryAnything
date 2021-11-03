@@ -79,7 +79,7 @@ li > img { // images themselves can't be large than their divs
   display: flex;
   background-color: transparent;
   position: absolute;
-  border-radius: 15px;
+  // border-radius: 15px;
   right: 50%;
   bottom: 20%;
   transform: translate(+50%, +50%);
@@ -94,7 +94,7 @@ li > img { // images themselves can't be large than their divs
   column-count: auto;
 }
 
-#tray li {
+#chosen-ingredients li {
   display: inline-block;
   width: 40px;
   height: auto;
@@ -115,12 +115,11 @@ li > img { // images themselves can't be large than their divs
 }
 
 #board-div {
-  width: fit-content;
-  height: fit-content;
+  width: 600px;
+  height: auto;
   display: flex;
   background-color: transparent;
   position: absolute;
-  border-radius: 15px;
   right: 52%;
   bottom: 50%;
   transform: translate(+50%, +50%);
@@ -130,4 +129,19 @@ li > img { // images themselves can't be large than their divs
   width: 600px;
   height: auto;
   position: relative;
+}
+
+#board-list {
+  list-style: none;
+  position: absolute;
+  width: 90%;
+  margin: auto;
+}
+
+li.chosen {
+  right: 52%;
+  bottom: 50%;
+  // transform: translate(+50%, +50%);
+  height: auto;
+  // margin: auto;
 }

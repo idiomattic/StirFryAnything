@@ -79,6 +79,8 @@ export default class Game {
       Game.prototype.removeLists();
       Game.prototype.removeL1Events();
       Game.prototype.placeBoard();
+      this.boardOccupied = false;
+      Game.prototype.addL2Events();
       Game.prototype.level2.bind(this)();
     };
   }
@@ -155,10 +157,8 @@ export default class Game {
   }
 
   removeL1Events() {
-    console.log('in removeL1Events')
     let trayEls = document.getElementById('chosen-ingredients').getElementsByTagName('li');
     for (let i = 0; i < trayEls.length; i++) {
-      debugger
       trayEls[i].onclick = null;
     }
   }
@@ -177,7 +177,37 @@ export default class Game {
     boardDiv.appendChild(boardPic);
   }
 
+  addL2Events() {
+    const trayEls = document.getElementById('chosen-ingredients').getElementsByTagName('li');
+    for (let i = 0; i < trayEls.length; i++) {
+      trayEls[i].onclick = this.toggleToBoard.bind(trayEls[i]);
+    }
+  }
   
+  toggleToBoard() {
+    const board = document.getElementById('board-div');
+    const chosenList = document.getElementById('chosen-ingredients');
+    let eTarg = this;
+    if (!eTarg.classList.contains('onboard') && board.getElementsByTagName('li').length === 0) {
+      chosenList.removeChild(eTarg);
+      eTarg.classList.toggle('onboard');
+      if (eTarg.classList.contains('Protein')) {
+        eTarg.style.width = '150px';
+      } else {
+        eTarg.style.width = '60px';
+      }
+      board.appendChild(eTarg);
+    } else if (eTarg.classList.contains('onboard')) {
+      board.removeChild(eTarg);
+      eTarg.classList.toggle('onboard');
+      if (eTarg.classList.contains('Protein')) {
+        eTarg.style.width = '100px';
+      } else {
+        eTarg.style.width = '40px';
+      }
+      chosenList.appendChild(eTarg);
+    }
+  }
 
 
 }

@@ -117,6 +117,18 @@ li > img {
   font-size: 20px;
 }
 
+#subMessage {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  color: white;
+  font-family: renogare;
+  font-weight: 40;
+  font-size: 20px;
+}
+
 #board-div {
   width: 600px;
   height: auto;
@@ -153,4 +165,37 @@ li > img {
 
 li.chosen {
   height: auto;
+}
+
+.modal {
+  border: aliceblue 5px solid;
+  font-family: renogare;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  z-index: 15;
+  background-color: white;
+  width: 800px;
+  max-width: 80%;
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header .title {
+  font-weight: 40;
+  font-size: 20px;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  list-style: none;
+  font-weight: 20;
+  font-size: 16px;
 }

@@ -215,3 +215,24 @@ li.chosen {
   top: 50%;
   transform: translate(0%, -50%);
 }
+
+.videowrapper {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: relative;
+  padding-bottom: 50%;
+  padding-top: 25px;
+  height: 0px;
+  z-index: 15;
+}
+
+#vid {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+}

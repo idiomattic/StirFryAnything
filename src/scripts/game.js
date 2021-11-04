@@ -52,6 +52,7 @@ export default class Game {
     if (this.level !== 3) { this.startGame() };
     this.showCompletedMeal();
     printer('')
+
     setTimeout(this.renderRecipe.bind(this), 5000)
     // debugger
   }
@@ -69,22 +70,41 @@ export default class Game {
   }
   
   enterLevel3() {
-    this.level3();
+    printer('Cooking up your recipe!')
+    this.displayVideo();
+
+    setTimeout(this.level3.bind(this), 10000);
+    // this.level3();
+  }
+
+  displayVideo() {
+    let videoWrapper = document.createElement('div')
+    videoWrapper.setAttribute('class', 'videowrapper');
+    let vid = document.createElement('iframe');
+    vid.setAttribute('id', 'vid')
+    vid.setAttribute('src', 'https://www.youtube.com/embed/dYYr3zejRIE')
+    vid.setAttribute('frameborder', '0')
+    videoWrapper.appendChild(vid);
+    document.getElementById('game-container').appendChild(videoWrapper);
+    setTimeout(() => {
+      document.getElementById('game-container').removeChild(videoWrapper);
+    }, 9000)
   }
 
   showCompletedMeal() {
     let ingrUl = document.getElementById('chosen-ingredients');
-    document.getElementById('tray').removeChild(ingrUl);
     const trayPic = document.getElementById('tray-pic');
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
-    printer('Thank you for playing!')
     if (protein.name === 'Pork') {
       trayPic.setAttribute('src', 'images/completed_pork.png');
+      // document.getElementById('tray').removeChild(ingrUl);
     } else if (protein.name === 'Chicken') {
       trayPic.setAttribute('src', 'images/completed_chicken.png');
+      // document.getElementById('tray').removeChild(ingrUl);
     } else if (protein.name === 'Beef') {
       trayPic.setAttribute('src', 'images/completed_beef.png');
     }
+    document.getElementById('tray').removeChild(ingrUl);
     trayPic.setAttribute('class', 'completed')
     setTimeout(() => {
       document.getElementById('tray').removeChild(trayPic);
@@ -92,6 +112,7 @@ export default class Game {
   }
 
   renderRecipe() {
+    printer('Thank you for playing!')
     const recipeModal = document.createElement('div');
     recipeModal.setAttribute('class', 'modal');
     recipeModal.setAttribute('id', 'modal');

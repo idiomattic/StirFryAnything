@@ -50,6 +50,7 @@ export default class Game {
   level3() {
     this.level++;
     if (this.level !== 3) { this.startGame() };
+    document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
     this.showCompletedMeal();
     printer('')
 
@@ -79,36 +80,40 @@ export default class Game {
 
   displayVideo() {
     let videoWrapper = document.createElement('div')
-    videoWrapper.setAttribute('class', 'videowrapper');
+    videoWrapper.setAttribute('id', 'videowrapper');
     let vid = document.createElement('iframe');
     vid.setAttribute('id', 'vid')
     vid.setAttribute('src', 'https://www.youtube.com/embed/dYYr3zejRIE')
     vid.setAttribute('frameborder', '0')
     videoWrapper.appendChild(vid);
     document.getElementById('game-container').appendChild(videoWrapper);
-    setTimeout(() => {
-      document.getElementById('game-container').removeChild(videoWrapper);
-    }, 9000)
+    // setTimeout(() => {
+    //   document.getElementById('game-container').removeChild(videoWrapper);
+    // }, 9000)
   }
 
   showCompletedMeal() {
     let ingrUl = document.getElementById('chosen-ingredients');
-    const trayPic = document.getElementById('tray-pic');
+    let trayDiv = document.getElementById('tray');
+    trayDiv.removeChild(document.getElementById('tray-pic'));
+    const trayPic = document.createElement('img');
+    trayDiv.removeChild(ingrUl);
+    trayPic.setAttribute('src', 'images/sheet_pan.PNG');
+    trayPic.setAttribute('id', 'tray-pic');
+    trayDiv.appendChild(trayPic);
+
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
     if (protein.name === 'Pork') {
       trayPic.setAttribute('src', 'images/completed_pork.png');
-      // document.getElementById('tray').removeChild(ingrUl);
     } else if (protein.name === 'Chicken') {
       trayPic.setAttribute('src', 'images/completed_chicken.png');
-      // document.getElementById('tray').removeChild(ingrUl);
     } else if (protein.name === 'Beef') {
       trayPic.setAttribute('src', 'images/completed_beef.png');
     }
-    document.getElementById('tray').removeChild(ingrUl);
     trayPic.setAttribute('class', 'completed')
-    setTimeout(() => {
-      document.getElementById('tray').removeChild(trayPic);
-    }, 5000)
+    // setTimeout(() => {
+    //   document.getElementById('tray').removeChild(trayPic);
+    // }, 5000)
   }
 
   renderRecipe() {

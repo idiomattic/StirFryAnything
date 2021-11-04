@@ -15,6 +15,14 @@ body {
   margin: 0;
 }
 
+#name {
+  margin: 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
 h1, h3 {
   text-align: center;
 }
@@ -25,7 +33,6 @@ h1 {
 }
 
 h3 {
-  margin: 0;
   font-family: renogare;
   font-weight: 40;
 }
@@ -199,4 +206,10 @@ li.chosen {
   list-style: none;
   font-weight: 20;
   font-size: 16px;
+}
+
+.completed {
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%);
 }

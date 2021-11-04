@@ -48,7 +48,6 @@ export default class Game {
   }
   
   level3() {
-    console.log('in level3');
     this.level++;
     if (this.level !== 3) { this.startGame() };
     printer('')
@@ -81,11 +80,11 @@ export default class Game {
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
     printer('Thank you for playing!')
     if (protein.name === 'Pork') {
-      trayPic.setAttribute('src', 'images/completed_pork.jpg');
+      trayPic.setAttribute('src', 'images/completed_pork.png');
     } else if (protein.name === 'Chicken') {
-      trayPic.setAttribute('src', 'images/completed_chicken.jpg');
+      trayPic.setAttribute('src', 'images/completed_chicken.png');
     } else if (protein.name === 'Beef') {
-      trayPic.setAttribute('src', 'images/completed_beef.jpg');
+      trayPic.setAttribute('src', 'images/completed_beef.png');
     }
     // if (this.)
   }
@@ -320,7 +319,7 @@ export default class Game {
         setTimeout(() => {
           this.removeBoard();
           printer('');
-          printer2('Get ready to stir fry!', '50%', '50%');
+          // printer2('Get ready to stir fry!', '50%', '50%');
           this.enterLevel3();
         }, 2000)
       }

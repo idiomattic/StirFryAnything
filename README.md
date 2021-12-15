@@ -1,4 +1,4 @@
-Play here! https://matthewlese.github.io/JavaScriptProject/
+Play here! https://matthewlese.github.io/StirFryAnything/
 
 I would like to create an educational cooking game which will utilize HTML canvas to teach users how to make a basic and authentic stir fry.  My game will take a user through the process of selecting and preparing ingredients, then it will allow the user to sequentially add ingredients to the wok in order to stir fry them.  Upon completion, the user will be given a proper, written recipe that would allow them to replicate their creation in real life.
 

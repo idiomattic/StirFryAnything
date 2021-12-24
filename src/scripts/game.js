@@ -28,13 +28,14 @@ export default class Game {
 
   level1() {
     if (this.level !== 1) { this.startGame() };
-    printer('Click ingredients to add them to your tray');
-    setTimeout(function(){printer('and click again to remove them.')}, 5000)
+    printer('')
+    // printer('Click ingredients to add them to your tray');
+    // setTimeout(function(){printer('and click again to remove them.')}, 5000)
     setTimeout(function(){
       printer('Click here to advance when ready.');
       let advanceMessage = document.getElementById('message')
       advanceMessage.addEventListener('click', Game.prototype.enterLevel2.bind(this))
-    }.bind(this), 12000)
+    }.bind(this), 8000)
     const container = document.getElementById('game-container');
     this.buildTray(container)
     let lists = this.buildLists(container);
@@ -43,8 +44,9 @@ export default class Game {
   level2() {
     this.level++;
     if (this.level !== 2) { this.startGame() };
-    printer('Choose ingredients from your tray to begin preparing')
-    setTimeout(function(){printer('then drag your cursor across to cut them.')}, 5000)
+    printer('')
+    // printer('Choose ingredients from your tray to begin preparing')
+    // setTimeout(function(){printer('then drag your cursor across to cut them.')}, 5000)
   }
   
   level3() {

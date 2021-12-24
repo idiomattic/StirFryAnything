@@ -70,13 +70,25 @@ h3 {
 
 #instructions-modal-child {
   position: absolute;
-  background: rgba(255, 255, 255, 0.95);
+  background: white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   padding: 44px 56px;
   width: 360px;
+  border-radius: 10px;
+}
+
+#instructions-list {
+  padding: 0;
+  list-style: none;
+  font-family: renogare;
+  font-weight: 40;
+}
+
+#instructions-list > li:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 #close-button:hover {

@@ -11,13 +11,18 @@ const center = [canvas.width / 2, canvas.height / 2]
 
 const instructionsModal = document.getElementById('instructions-modal-background')
 const instructionsButton = document.getElementById('instructions')
+const closeButton = document.getElementById('close-button')
+
 instructionsButton.addEventListener('click', e => {
+  instructionsModal.classList.toggle('hidden')
+})
+
+closeButton.addEventListener('click', e => {
   instructionsModal.classList.toggle('hidden')
 })
 
 
 addEventListener('load', start);
-// addEventListener('DOMContentLoaded', start);
 
 function start() {
   let inIntro = true;

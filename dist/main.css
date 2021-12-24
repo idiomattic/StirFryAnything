@@ -37,6 +37,10 @@ h3 {
   font-weight: 40;
 }
 
+#instructions {
+  cursor: pointer;
+}
+
 #game-canvas {
   background-color: black;
   padding: 0;

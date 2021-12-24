@@ -8,6 +8,7 @@ export default class Game {
     this.ctx = context;
     this.startGame();
     this.ingredientsArr = [];
+    this.proteinChosen = false
   }
 
   startGame() {
@@ -29,8 +30,6 @@ export default class Game {
   level1() {
     if (this.level !== 1) { this.startGame() };
     printer('')
-    // printer('Click ingredients to add them to your tray');
-    // setTimeout(function(){printer('and click again to remove them.')}, 5000)
     setTimeout(function(){
       printer('Click here to advance when ready.');
       let advanceMessage = document.getElementById('message')
@@ -45,8 +44,6 @@ export default class Game {
     this.level++;
     if (this.level !== 2) { this.startGame() };
     printer('')
-    // printer('Choose ingredients from your tray to begin preparing')
-    // setTimeout(function(){printer('then drag your cursor across to cut them.')}, 5000)
   }
   
   level3() {
@@ -55,9 +52,7 @@ export default class Game {
     document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
     this.showCompletedMeal();
     printer('')
-
     setTimeout(this.renderRecipe.bind(this), 5000)
-    // debugger
   }
   
   
@@ -89,9 +84,6 @@ export default class Game {
     vid.setAttribute('frameborder', '0')
     videoWrapper.appendChild(vid);
     document.getElementById('game-container').appendChild(videoWrapper);
-    // setTimeout(() => {
-    //   document.getElementById('game-container').removeChild(videoWrapper);
-    // }, 9000)
   }
 
   showCompletedMeal() {
@@ -113,9 +105,6 @@ export default class Game {
       trayPic.setAttribute('src', 'images/completed_beef.png');
     }
     trayPic.setAttribute('class', 'completed')
-    // setTimeout(() => {
-    //   document.getElementById('tray').removeChild(trayPic);
-    // }, 5000)
   }
 
   renderRecipe() {
@@ -139,7 +128,6 @@ export default class Game {
       title.innerHTML = `Stir Fried ${veggies}`
     }
 
-    // title.innerHTML = 'title'
     modalHeader.appendChild(title);
     const modalBody = document.createElement('ul');
     modalBody.setAttribute('class', 'modal-body');
@@ -157,7 +145,7 @@ export default class Game {
 
   recipeIngrs() {
     const recipeInfo = [];
-    this.ingredientsArr.forEach((ingr) => {
+    this.ingredientsArr.forEach(ingr => {
       if (ingr.name === 'Chicken') {
         recipeInfo.push(`0.5lbs ${ingr.name}, Thigh Preferably`)
       } else if (ingr.name === 'Pork' || ingr.name === 'Beef') {
@@ -193,16 +181,29 @@ export default class Game {
       parent = document.getElementById('proteinList');
     }
     if (!eTarg.classList.contains('chosen')) {
-      parent.removeChild(eTarg);
-      eTarg.classList.toggle('chosen');
-      if (eTarg.classList.contains('Protein')) {
-        eTarg.style.width = '100px';
+      if ((eTarg.id === 'Garlic' || eTarg.id === 'Ginger') || this.ingredientsArr.length < 3) {
+        printer('')
+        if (eTarg.classList.contains('Protein') && !this.proteinChosen) {
+          parent.removeChild(eTarg);
+          eTarg.classList.toggle('chosen');
+          this.proteinChosen = true
+          eTarg.style.width = '100px';
+          console.log(this.proteinChosen)
+        } else if (eTarg.classList.contains('Vegetable')) {
+          parent.removeChild(eTarg);
+          eTarg.classList.toggle('chosen');
+          eTarg.style.width = '40px';
+          console.log(this.proteinChosen)
+        }
+        chosenList.appendChild(eTarg);
+        this.ingredientsArr.push(ingrInst[0]);
       } else {
-        eTarg.style.width = '40px';
+        printer('Too many ingredients')
       }
-      chosenList.appendChild(eTarg);
-      this.ingredientsArr.push(ingrInst[0]);
     } else {
+      if (eTarg.classList.contains('Protein')) {
+        this.proteinChosen = false
+      }
       chosenList.removeChild(eTarg);
       this.ingredientsArr.splice(this.ingredientsArr.indexOf(ingrInst), 1);
       eTarg.classList.toggle('chosen');
@@ -297,22 +298,10 @@ export default class Game {
       }
       let that = this;
       eTarg.onmouseover = function(e) {
-        // debugger
         e.currentTarget.onmouseout = Game.prototype.prepareIngredient.bind(that);
       }
       boardList.appendChild(eTarg);
-    } 
-    // else if (eTarg.classList.contains('onboard')) {
-    //   boardList.removeChild(eTarg);
-    //   eTarg.onmouseover = null;
-    //   eTarg.classList.toggle('onboard');
-    //   if (eTarg.classList.contains('Protein')) {
-    //     eTarg.style.width = '100px';
-    //   } else {
-    //     eTarg.style.width = '40px';
-    //   }
-    //   chosenList.appendChild(eTarg);
-    // }
+    }
   }
 
   prepareIngredient(e) {
@@ -354,7 +343,6 @@ export default class Game {
         setTimeout(() => {
           this.removeBoard();
           printer('');
-          // printer2('Get ready to stir fry!', '50%', '50%');
           this.enterLevel3();
         }, 2000)
       }

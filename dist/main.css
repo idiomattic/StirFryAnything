@@ -80,7 +80,7 @@ h3 {
   transform: translate(-50%, -50%);
   text-align: center;
   padding: 44px 56px;
-  width: 360px;
+  width: 700px;
   border-radius: 10px;
 }
 
@@ -92,7 +92,11 @@ h3 {
 }
 
 #instructions-list > li:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
+}
+
+#instructions-list > li > p {
+  font-size: 14px;
 }
 
 #close-button:hover {

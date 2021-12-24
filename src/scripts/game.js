@@ -8,6 +8,7 @@ export default class Game {
     this.ctx = context;
     this.startGame();
     this.ingredientsArr = [];
+    this.ingredientsCount = 0
     this.proteinChosen = false
   }
 
@@ -181,22 +182,28 @@ export default class Game {
       parent = document.getElementById('proteinList');
     }
     if (!eTarg.classList.contains('chosen')) {
-      if ((eTarg.id === 'Garlic' || eTarg.id === 'Ginger') || this.ingredientsArr.length < 3) {
+      if ((eTarg.id === 'Garlic' || eTarg.id === 'Ginger') || this.ingredientsCount < 3) {
         printer('')
         if (eTarg.classList.contains('Protein') && !this.proteinChosen) {
+          printer('')
           parent.removeChild(eTarg);
           eTarg.classList.toggle('chosen');
           this.proteinChosen = true
           eTarg.style.width = '100px';
-          console.log(this.proteinChosen)
+          chosenList.appendChild(eTarg);
+          this.ingredientsArr.push(ingrInst[0]);
+          this.ingredientsCount++
         } else if (eTarg.classList.contains('Vegetable')) {
+          printer('')
           parent.removeChild(eTarg);
           eTarg.classList.toggle('chosen');
           eTarg.style.width = '40px';
-          console.log(this.proteinChosen)
+          chosenList.appendChild(eTarg);
+          this.ingredientsArr.push(ingrInst[0]);
+          if (eTarg.id !== 'Garlic' && eTarg.id !== 'Ginger') {this.ingredientsCount++}
+        } else {
+          printer('Too much protein')
         }
-        chosenList.appendChild(eTarg);
-        this.ingredientsArr.push(ingrInst[0]);
       } else {
         printer('Too many ingredients')
       }
@@ -204,12 +211,15 @@ export default class Game {
       if (eTarg.classList.contains('Protein')) {
         this.proteinChosen = false
       }
+      printer('')
       chosenList.removeChild(eTarg);
       this.ingredientsArr.splice(this.ingredientsArr.indexOf(ingrInst), 1);
+      if (eTarg.id !== 'Garlic' && eTarg.id !== 'Ginger') {this.ingredientsCount--}
       eTarg.classList.toggle('chosen');
       eTarg.style.width = '100px';
       parent.appendChild(eTarg);
     }
+    console.log(this.ingredientsCount)
   }
       
   buildLists(container) {

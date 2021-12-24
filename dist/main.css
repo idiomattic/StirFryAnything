@@ -16,7 +16,7 @@ body {
 }
 
 #name {
-  margin: 0;
+  margin: 20px 0 0 0;
 }
 
 h1 {
@@ -51,6 +51,10 @@ h3 {
   width: fit-content;
   height: fit-content;
   position: relative;
+}
+
+#instructions-modal-background.hidden, #instructions-modal-background.hidden > #instructions-modal-child {
+  display: none;
 }
 
 #instructions-modal-background {

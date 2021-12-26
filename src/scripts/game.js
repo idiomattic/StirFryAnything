@@ -43,7 +43,7 @@ export default class Game {
       printer('Click here to advance when ready.');
       let advanceMessage = document.getElementById('message')
       advanceMessage.addEventListener('click', Game.prototype.enterLevel2.bind(this))
-    }.bind(this), 8000)
+    }.bind(this), 5000)
     const container = document.getElementById('game-container');
     this.buildTray(container)
     let lists = this.buildLists(container);
@@ -191,9 +191,9 @@ export default class Game {
     }
     if (!eTarg.classList.contains('chosen')) {
       if ((eTarg.id === 'Garlic' || eTarg.id === 'Ginger') || this.ingredientsCount < 3) {
-        printer('')
+        printer2('')
         if (eTarg.classList.contains('Protein') && !this.proteinChosen) {
-          printer('')
+          printer2('')
           parent.removeChild(eTarg);
           eTarg.classList.toggle('chosen');
           this.proteinChosen = true
@@ -202,7 +202,7 @@ export default class Game {
           this.ingredientsArr.push(ingrInst[0]);
           this.ingredientsCount++
         } else if (eTarg.classList.contains('Vegetable')) {
-          printer('')
+          printer2('')
           parent.removeChild(eTarg);
           eTarg.classList.toggle('chosen');
           eTarg.style.width = '40px';
@@ -210,16 +210,16 @@ export default class Game {
           this.ingredientsArr.push(ingrInst[0]);
           if (eTarg.id !== 'Garlic' && eTarg.id !== 'Ginger') {this.ingredientsCount++}
         } else {
-          printer('Too much protein')
+          printer2('Too much protein', '65%')
         }
       } else {
-        printer('Too many ingredients')
+        printer2('Too many ingredients', '65%')
       }
     } else {
       if (eTarg.classList.contains('Protein')) {
         this.proteinChosen = false
       }
-      printer('')
+      printer2('')
       chosenList.removeChild(eTarg);
       this.ingredientsArr.splice(this.ingredientsArr.indexOf(ingrInst), 1);
       if (eTarg.id !== 'Garlic' && eTarg.id !== 'Ginger') {this.ingredientsCount--}

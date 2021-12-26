@@ -3,9 +3,11 @@ import {printer, printer2} from './util'
 import {INGREDIENTS, proteins, vegetables} from "./ingredients"
 
 export default class Game {
-  constructor(canvas, context) {
+  constructor(canvas, context, vegMode) {
+    console.log('in constructor', vegMode)
     this.canvas = canvas;
     this.ctx = context;
+    this.vegMode = false
     this.startGame();
     this.ingredientsArr = [];
     this.ingredientsCount = 0
@@ -17,6 +19,13 @@ export default class Game {
     let hello = printer('Press Enter to Begin')
     hello.style.top = "50%";
     this.level = 1;
+
+    const vegModeSwitch = document.getElementById('veg-mode')
+    vegModeSwitch.addEventListener('change', e => {
+      this.vegMode = !this.vegMode
+      console.log('in event listener', this.vegMode)
+    })
+
     window.addEventListener('keypress', (key) => {
       if (key.key === "Enter") {
         this.level1();
@@ -30,6 +39,7 @@ export default class Game {
 
   level1() {
     if (this.level !== 1) { this.startGame() };
+    console.log('in level1', this.vegMode)
     printer('')
     setTimeout(function(){
       printer('Click here to advance when ready.');

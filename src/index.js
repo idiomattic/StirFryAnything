@@ -1,5 +1,5 @@
 import Game from './scripts/game'
-// import Star from './scripts/space'
+import Star from './scripts/space'
 
 const canvas = document.getElementById("game-canvas");
 const context = canvas.getContext('2d');
@@ -17,14 +17,17 @@ instructionsButton.addEventListener('click', e => {
   instructionsModal.classList.toggle('hidden')
 })
 
+let vegMode = false
+console.log('in index', vegMode)
+
 closeButton.addEventListener('click', e => {
   instructionsModal.classList.toggle('hidden')
 })
 
-
 addEventListener('load', start);
 
 function start() {
+  const game = new Game(canvas, context, vegMode);
   let inIntro = true;
-  const game = new Game(canvas, context);
+  console.log('in start', vegMode)
 }

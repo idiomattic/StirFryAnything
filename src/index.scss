@@ -36,19 +36,26 @@ h3 { //footer
 }
 
 div.options-container {
-  // position: relative;
-  // left: 50%;
-  // transform: translateX(-50px);
   display: flex;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-200px);
+  margin-bottom: 10px;
 }
 
-.middot {
-  font-size: 40px;
+div.options-container > h3.middot {
+  margin: 0 20px;
+}
+
+div.options-container > h3 {
   margin: 0;
-  font-weight: bolder;
 }
 
 .switch {
+  margin-left: 10px;
+  font-family: renogare;
+  font-weight: 40;
   position: relative;
   display: inline-block;
   width: 60px;

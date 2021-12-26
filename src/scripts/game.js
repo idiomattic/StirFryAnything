@@ -227,7 +227,6 @@ export default class Game {
       eTarg.style.width = '100px';
       parent.appendChild(eTarg);
     }
-    console.log(this.ingredientsCount)
   }
       
   buildLists(container) {

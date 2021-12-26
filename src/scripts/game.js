@@ -244,21 +244,22 @@ export default class Game {
       veggieEl.appendChild(veggieImg);
       veggieList.appendChild(veggieEl);
     })
-    
     let proteinList = document.createElement('ul');
     proteinList.setAttribute('id', 'proteinList');
     container.appendChild(proteinList);
-    proteins.forEach((protein) => {
-      let proteinEl = document.createElement('li');
-      proteinEl.setAttribute('class', `${protein.category}`)
-      proteinEl.setAttribute('id', `${protein.name}`);
-      let proteinImg = document.createElement('img');
-      proteinImg.setAttribute('src', `${protein.raw_img_link}`);
-      proteinImg.setAttribute('alt', `${protein.name}`);
-      proteinEl.onclick = this.togglePos.bind(this);
-      proteinEl.appendChild(proteinImg);
-      proteinList.appendChild(proteinEl);
-    })
+    if (!this.vegMode) {
+      proteins.forEach((protein) => {
+        let proteinEl = document.createElement('li');
+        proteinEl.setAttribute('class', `${protein.category}`)
+        proteinEl.setAttribute('id', `${protein.name}`);
+        let proteinImg = document.createElement('img');
+        proteinImg.setAttribute('src', `${protein.raw_img_link}`);
+        proteinImg.setAttribute('alt', `${protein.name}`);
+        proteinEl.onclick = this.togglePos.bind(this);
+        proteinEl.appendChild(proteinImg);
+        proteinList.appendChild(proteinEl);
+      })
+    }
     return [veggieList, proteinList];
   }
 

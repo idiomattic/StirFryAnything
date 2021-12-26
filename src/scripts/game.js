@@ -197,7 +197,7 @@ export default class Game {
           parent.removeChild(eTarg);
           eTarg.classList.toggle('chosen');
           this.proteinChosen = true
-          eTarg.style.width = '100px';
+          eTarg.style.width = '80px';
           chosenList.appendChild(eTarg);
           this.ingredientsArr.push(ingrInst[0]);
           this.ingredientsCount++

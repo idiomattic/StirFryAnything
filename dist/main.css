@@ -235,6 +235,7 @@ li > img {
 }
 
 #chosen-ingredients {
+  padding-left: 30px;
   display: flex;
   list-style: none;
   position: absolute;

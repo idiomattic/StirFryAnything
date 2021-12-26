@@ -17,9 +17,6 @@ instructionsButton.addEventListener('click', e => {
   instructionsModal.classList.toggle('hidden')
 })
 
-let vegMode = false
-console.log('in index', vegMode)
-
 closeButton.addEventListener('click', e => {
   instructionsModal.classList.toggle('hidden')
 })
@@ -27,7 +24,6 @@ closeButton.addEventListener('click', e => {
 addEventListener('load', start);
 
 function start() {
-  const game = new Game(canvas, context, vegMode);
-  let inIntro = true;
-  console.log('in start', vegMode)
+  const game = new Game(canvas, context);
+  let inIntro = true
 }

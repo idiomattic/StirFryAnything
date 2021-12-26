@@ -3,8 +3,7 @@ import {printer, printer2} from './util'
 import {INGREDIENTS, proteins, vegetables} from "./ingredients"
 
 export default class Game {
-  constructor(canvas, context, vegMode) {
-    console.log('in constructor', vegMode)
+  constructor(canvas, context) {
     this.canvas = canvas;
     this.ctx = context;
     this.vegMode = false
@@ -23,7 +22,6 @@ export default class Game {
     const vegModeSwitch = document.getElementById('veg-mode')
     vegModeSwitch.addEventListener('change', e => {
       this.vegMode = !this.vegMode
-      console.log('in event listener', this.vegMode)
     })
 
     window.addEventListener('keypress', (key) => {
@@ -38,8 +36,8 @@ export default class Game {
   }
 
   level1() {
-    if (this.level !== 1) { this.startGame() };
-    console.log('in level1', this.vegMode)
+    document.getElementById('checkbox').disabled = true
+    if (this.level !== 1) { this.startGame() }
     printer('')
     setTimeout(function(){
       printer('Click here to advance when ready.');

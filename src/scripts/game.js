@@ -58,9 +58,15 @@ export default class Game {
   level3() {
     this.level++;
     if (this.level !== 3) { this.startGame() };
-    // document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
-    if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0]) {
+    document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
+    // document.getElementById('tray').classList.toggle('hidden')
+    console.log('ingredientsArr in level3', this.ingredientsArr)
+    debugger
+    if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
+      console.log('on line 64')
       this.showCompletedMeal();
+    } else {
+      console.log('on line 67')
     }
     printer('')
     setTimeout(this.renderRecipe.bind(this), 5000)
@@ -79,24 +85,14 @@ export default class Game {
   }
   
   enterLevel3() {
+    console.log('enterLevel3')
     printer('Cooking up your recipe!')
     this.displayVideo();
 
     setTimeout(this.level3.bind(this), 10000);
-    // this.level3();
   }
 
   displayVideo() {
-    // let videoWrapper = document.createElement('div')
-    // videoWrapper.setAttribute('id', 'videowrapper');
-    
-    // let vid = document.createElement('iframe');
-    // vid.setAttribute('id', 'vid')
-    // vid.setAttribute('src', 'https://www.youtube.com/embed/dYYr3zejRIE')
-    // vid.setAttribute('frameborder', '0')
-    // videoWrapper.appendChild(vid);
-    // document.getElementById('game-container').appendChild(videoWrapper);
-
     const videoWrapper = document.getElementById('videowrapper')
     videoWrapper.classList.toggle('hidden')
     setTimeout(() => {
@@ -105,14 +101,14 @@ export default class Game {
   }
 
   showCompletedMeal() {
-    let ingrUl = document.getElementById('chosen-ingredients');
-    let trayDiv = document.getElementById('tray');
-    trayDiv.removeChild(document.getElementById('tray-pic'));
-    const trayPic = document.createElement('img');
-    trayDiv.removeChild(ingrUl);
-    trayPic.setAttribute('src', 'images/sheet_pan.PNG');
-    trayPic.setAttribute('id', 'tray-pic');
-    trayDiv.appendChild(trayPic);
+    // let ingrUl = document.getElementById('chosen-ingredients');
+    // let trayDiv = document.getElementById('tray');
+    // trayDiv.removeChild(document.getElementById('tray-pic'));
+    // const trayPic = document.createElement('img');
+    // trayDiv.removeChild(ingrUl);
+    // trayPic.setAttribute('src', 'images/sheet_pan.PNG');
+    // trayPic.setAttribute('id', 'tray-pic');
+    // trayDiv.appendChild(trayPic);
 
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
     if (protein.name === 'Pork') {

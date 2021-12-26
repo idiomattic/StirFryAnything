@@ -58,7 +58,7 @@ export default class Game {
   level3() {
     this.level++;
     if (this.level !== 3) { this.startGame() };
-    document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
+    // document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
     this.showCompletedMeal();
     printer('')
     setTimeout(this.renderRecipe.bind(this), 5000)
@@ -85,14 +85,21 @@ export default class Game {
   }
 
   displayVideo() {
-    let videoWrapper = document.createElement('div')
-    videoWrapper.setAttribute('id', 'videowrapper');
-    let vid = document.createElement('iframe');
-    vid.setAttribute('id', 'vid')
-    vid.setAttribute('src', 'https://www.youtube.com/embed/dYYr3zejRIE')
-    vid.setAttribute('frameborder', '0')
-    videoWrapper.appendChild(vid);
-    document.getElementById('game-container').appendChild(videoWrapper);
+    // let videoWrapper = document.createElement('div')
+    // videoWrapper.setAttribute('id', 'videowrapper');
+    
+    // let vid = document.createElement('iframe');
+    // vid.setAttribute('id', 'vid')
+    // vid.setAttribute('src', 'https://www.youtube.com/embed/dYYr3zejRIE')
+    // vid.setAttribute('frameborder', '0')
+    // videoWrapper.appendChild(vid);
+    // document.getElementById('game-container').appendChild(videoWrapper);
+
+    const videoWrapper = document.getElementById('videowrapper')
+    videoWrapper.classList.toggle('hidden')
+    setTimeout(() => {
+      videoWrapper.classList.toggle('hidden')
+    }, 8000)
   }
 
   showCompletedMeal() {
@@ -340,6 +347,7 @@ export default class Game {
       printer('Something went wrong.  Apologies');
       setTimeout(this.startGame(), 5000)
     }
+    console.log(ingrInst)
     ingrInst.state = 'Prepped';
     let newUrl = ingrInst.prepped_img_link;
     e.target.setAttribute('src', newUrl);

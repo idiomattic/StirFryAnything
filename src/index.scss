@@ -352,6 +352,10 @@ li.chosen {
   transform: translate(0%, -50%);
 }
 
+#videowrapper.hidden, #videowrapper.hidden > #video{
+  display: none;
+}
+
 #videowrapper {
   left: 50%;
   top: 50%;

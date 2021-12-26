@@ -356,9 +356,8 @@ li.chosen {
 }
 
 #videowrapper {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 36%;
+  transform: translateY(-80%);
   position: relative;
   padding-bottom: 50%;
   padding-top: 25px;
@@ -367,7 +366,7 @@ li.chosen {
   z-index: 15;
 }
 
-#vid {
+#video {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -375,4 +374,8 @@ li.chosen {
   bottom: 0px;
   height: 100%;
   width: 100%;
+}
+
+#gif {
+  width: 400px;
 }

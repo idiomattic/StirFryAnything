@@ -59,7 +59,9 @@ export default class Game {
     this.level++;
     if (this.level !== 3) { this.startGame() };
     // document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
-    this.showCompletedMeal();
+    if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0]) {
+      this.showCompletedMeal();
+    }
     printer('')
     setTimeout(this.renderRecipe.bind(this), 5000)
   }

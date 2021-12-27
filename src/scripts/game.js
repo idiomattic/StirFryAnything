@@ -167,13 +167,7 @@ export default class Game {
   recipeIngrs() {
     const recipeInfo = [];
     this.ingredientsArr.forEach(ingr => {
-      if (ingr.name === 'Chicken') {
-        recipeInfo.push(`0.5lbs ${ingr.name}, Thigh Preferably`)
-      } else if (ingr.name === 'Pork' || ingr.name === 'Beef') {
-        recipeInfo.push(`0.5lbs Lean ${ingr.name}`)
-      } else if (ingr.category === 'Vegetable') {
-        recipeInfo.push(`2 ${ingr.name}`)
-      }
+      recipeInfo.push(`${ingr.description}`)
     })
     return recipeInfo;
   }

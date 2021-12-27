@@ -377,3 +377,7 @@ li.chosen {
 #gif {
   width: 400px;
 }
+
+.ingredient:not(:last-child) {
+  margin-bottom: 10px;
+}

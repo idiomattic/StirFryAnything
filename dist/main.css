@@ -44,6 +44,7 @@ div.options-container {
   left: 50%;
   transform: translateX(-200px);
   margin-bottom: 10px;
+  width: fit-content;
 }
 
 div.options-container > h3.middot {
@@ -353,6 +354,10 @@ li.chosen {
 
 .hidden, .hidden * {
   display: none;
+}
+
+#game-and-instructions-container {
+  height: 75vh;
 }
 
 #videowrapper {

@@ -87,16 +87,16 @@ export default class Game {
     document.getElementById('chosen-ingredients').classList.toggle('hidden')
     printer('Cooking up your recipe!')
     this.displayVideo();
-
-    setTimeout(this.level3.bind(this), 10000);
+    // this.level3.bind(this);
   }
-
+  
   displayVideo() {
     document.getElementById('tray').classList.toggle('hidden')
     const videoWrapper = document.getElementById('videowrapper')
     videoWrapper.classList.toggle('hidden')
     setTimeout(() => {
       videoWrapper.classList.toggle('hidden')
+      setTimeout(this.level3.bind(this), 1000);
     }, 8000)
   }
   

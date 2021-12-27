@@ -61,7 +61,7 @@ export default class Game {
     printer('')
     if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
       this.showCompletedMeal();
-      setTimeout(this.renderRecipe.bind(this), 5000)
+      setTimeout(this.renderRecipe.bind(this), 3000)
     } else {
       setTimeout(this.renderRecipe.bind(this), 1000)
     }
@@ -82,6 +82,7 @@ export default class Game {
   enterLevel3() {
     document.getElementById('chosen-ingredients').classList.toggle('hidden')
     printer('Cooking up your recipe!')
+    printer2('')
     this.displayVideo();
   }
   
@@ -91,7 +92,7 @@ export default class Game {
     videoWrapper.classList.toggle('hidden')
     setTimeout(() => {
       videoWrapper.classList.toggle('hidden')
-      setTimeout(this.level3.bind(this), 1000);
+      setTimeout(this.level3.bind(this), 100);
     }, 8000)
   }
   
@@ -117,7 +118,7 @@ export default class Game {
   }
 
   renderRecipe() {
-    printer('Thank you for playing!')
+    // printer('Thank you for playing!')
     const recipeModal = document.createElement('div');
     recipeModal.setAttribute('class', 'modal');
     recipeModal.setAttribute('id', 'modal');
@@ -201,6 +202,11 @@ export default class Game {
     slurry.setAttribute('class', 'instructions')
     slurry.innerHTML = 'Stir your corn starch slurry and add to the wok, then toss to coat.'
     modalBody.appendChild(slurry)
+
+    let thanks = document.createElement('li')
+    thanks.setAttribute('class', 'thanks')
+    thanks.innerHTML = 'Thank you for playing!'
+    modalBody.appendChild(thanks)
 
     recipeModal.appendChild(modalBody);
     document.getElementById('game-container').appendChild(recipeModal)

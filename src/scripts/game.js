@@ -131,8 +131,14 @@ export default class Game {
     let vegNames = [];
     mainVegetables.forEach(veg => vegNames.push(veg.name));
     let marinade
+    let prepProteinStep = document.createElement('li')
+    let marinadeStep = document.createElement('li')
+    prepProteinStep.setAttribute('class', 'instructions');
+    marinadeStep.setAttribute('class', 'instructions');
     if (chosenProtein) {
       title.innerHTML = `${chosenProtein.name} with ${vegNames.join(' and ')}`
+      prepProteinStep.innerHTML = `Trim and cut ${chosenProtein.name} accordingly.`
+      marinadeStep.innerHTML = `Mix ${chosenProtein.name} with marinade ingredients, oil last, and set aside.`
       if (chosenProtein.name === 'Beef') {
         marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp baking soda, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
       } else {
@@ -160,6 +166,42 @@ export default class Game {
         modalBody.appendChild(ingrItem);
       }
     })
+    if (chosenProtein) {
+      modalBody.appendChild(prepProteinStep)
+      modalBody.appendChild(marinadeStep)
+    }
+    let prepStep = document.createElement('li')
+    prepStep.setAttribute('class', 'instructions')
+    prepStep.innerHTML = 'Prep vegetables accordingly.  Stir 2 tsp of corn starch with 1 tbsp of cool water in a small bowl.'
+    modalBody.appendChild(prepStep)
+
+    let heating = document.createElement('li')
+    heating.setAttribute('class', 'instructions')
+    heating.innerHTML = 'Place wok over high heat until very hot.  Add 1-2tbsp oil to coat.  Heat until oil is shimmering.'
+    modalBody.appendChild(heating)
+
+    if (chosenProtein) {
+      let cookProtein = document.createElement('li')
+      cookProtein.setAttribute('class', 'instructions')
+      cookProtein.innerHTML = 'Add protein to the wok.  Stir or toss continuously.'
+      modalBody.appendChild(cookProtein)
+    }
+
+    let cookVeggies = document.createElement('li')
+    cookVeggies.setAttribute('class', 'instructions')
+    cookVeggies.innerHTML = 'Lower heat to medium.  Add additional oil if dry.  Add large vegetables and cook until desired doneness.'
+    modalBody.appendChild(cookVeggies)
+
+    let finish = document.createElement('li')
+    finish.setAttribute('class', 'instructions')
+    finish.innerHTML = 'Add garlic and/or ginger, if using.  Cook until fragrant.  Add a splash of light soy sauce, then cooking wine around the sides of the wok.'
+    modalBody.appendChild(finish)
+
+    let slurry = document.createElement('li')
+    slurry.setAttribute('class', 'instructions')
+    slurry.innerHTML = 'Stir your corn starch slurry and add to the wok, then toss to coat.'
+    modalBody.appendChild(slurry)
+
     recipeModal.appendChild(modalBody);
     document.getElementById('game-container').appendChild(recipeModal)
   }

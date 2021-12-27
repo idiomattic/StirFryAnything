@@ -379,6 +379,14 @@ li.chosen {
   width: 400px;
 }
 
-.ingredient:not(:last-child) {
+.ingredient {
   margin-bottom: 10px;
+}
+
+.ingredient:last-of-type {
+  padding-bottom: 20px;
+}
+
+.instructions {
+  margin-top: 10px;
 }

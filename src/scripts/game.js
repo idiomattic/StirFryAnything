@@ -57,17 +57,14 @@ export default class Game {
   
   level3() {
     this.level++;
-    if (this.level !== 3) { this.startGame() };
-    // document.getElementById('tray').classList.toggle('hidden')
-    // console.log('ingredientsArr in level3', this.ingredientsArr)
-    if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
-      // console.log('on line 64')
-      this.showCompletedMeal();
-    } else {
-      // console.log('on line 67')
-    }
+    if (this.level !== 3) { this.startGame() }
     printer('')
-    setTimeout(this.renderRecipe.bind(this), 5000)
+    if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
+      this.showCompletedMeal();
+      setTimeout(this.renderRecipe.bind(this), 5000)
+    } else {
+      setTimeout(this.renderRecipe.bind(this), 1000)
+    }
   }
   
   
@@ -86,7 +83,6 @@ export default class Game {
     document.getElementById('chosen-ingredients').classList.toggle('hidden')
     printer('Cooking up your recipe!')
     this.displayVideo();
-    // this.level3.bind(this);
   }
   
   displayVideo() {
@@ -137,14 +133,14 @@ export default class Game {
     let marinade
     if (chosenProtein) {
       title.innerHTML = `${chosenProtein.name} with ${vegNames.join(' and ')}`
-      // let marinade
       if (chosenProtein.name === 'Beef') {
         marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp baking soda, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
       } else {
         marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
       }
     } else {
-      let veggies = this.recipeIngrs().join(', ');
+      let numVeggies = vegNames.length
+      let veggies = vegNames.slice(0, numVeggies - 1).join(', ') + ' and ' + vegNames.slice(numVeggies - 1).join('');
       title.innerHTML = `Stir Fried ${veggies}`
     }
     modalHeader.appendChild(title);
@@ -152,8 +148,6 @@ export default class Game {
     modalBody.setAttribute('class', 'modal-body');
 
     const ingrInfo = this.recipeIngrs();
-    console.log(marinade)
-    // console.log('ingrInfo', ingrInfo) // array of strings
     ingrInfo.forEach(ingr => {
       let ingrItem = document.createElement('li');
       ingrItem.setAttribute('class', 'ingredient');

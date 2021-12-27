@@ -59,12 +59,12 @@ export default class Game {
     this.level++;
     if (this.level !== 3) { this.startGame() };
     // document.getElementById('tray').classList.toggle('hidden')
-    console.log('ingredientsArr in level3', this.ingredientsArr)
+    // console.log('ingredientsArr in level3', this.ingredientsArr)
     if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
-      console.log('on line 64')
+      // console.log('on line 64')
       this.showCompletedMeal();
     } else {
-      console.log('on line 67')
+      // console.log('on line 67')
     }
     printer('')
     setTimeout(this.renderRecipe.bind(this), 5000)
@@ -83,7 +83,6 @@ export default class Game {
   }
   
   enterLevel3() {
-    console.log('enterLevel3')
     document.getElementById('chosen-ingredients').classList.toggle('hidden')
     printer('Cooking up your recipe!')
     this.displayVideo();
@@ -135,23 +134,37 @@ export default class Game {
     let mainVegetables = this.ingredientsArr.filter(ingr => ingr.category === 'Vegetable').filter(ingr => ingr.name !== 'Ginger' && ingr.name !== 'Garlic');
     let vegNames = [];
     mainVegetables.forEach(veg => vegNames.push(veg.name));
+    let marinade
     if (chosenProtein) {
       title.innerHTML = `${chosenProtein.name} with ${vegNames.join(' and ')}`
+      // let marinade
+      if (chosenProtein.name === 'Beef') {
+        marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp baking soda, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
+      } else {
+        marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
+      }
     } else {
       let veggies = this.recipeIngrs().join(', ');
       title.innerHTML = `Stir Fried ${veggies}`
     }
-
     modalHeader.appendChild(title);
     const modalBody = document.createElement('ul');
     modalBody.setAttribute('class', 'modal-body');
 
     const ingrInfo = this.recipeIngrs();
-    ingrInfo.forEach((ingr) => {
+    console.log(marinade)
+    // console.log('ingrInfo', ingrInfo) // array of strings
+    ingrInfo.forEach(ingr => {
       let ingrItem = document.createElement('li');
       ingrItem.setAttribute('class', 'ingredient');
       ingrItem.innerHTML = ingr;
       modalBody.appendChild(ingrItem);
+      if (ingr.charAt(0) === '0') {
+        let ingrItem = document.createElement('li');
+        ingrItem.setAttribute('class', 'ingredient');
+        ingrItem.innerHTML = marinade;
+        modalBody.appendChild(ingrItem);
+      }
     })
     recipeModal.appendChild(modalBody);
     document.getElementById('game-container').appendChild(recipeModal)

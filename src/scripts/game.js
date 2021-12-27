@@ -58,10 +58,8 @@ export default class Game {
   level3() {
     this.level++;
     if (this.level !== 3) { this.startGame() };
-    document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
     // document.getElementById('tray').classList.toggle('hidden')
     console.log('ingredientsArr in level3', this.ingredientsArr)
-    debugger
     if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
       console.log('on line 64')
       this.showCompletedMeal();
@@ -86,6 +84,7 @@ export default class Game {
   
   enterLevel3() {
     console.log('enterLevel3')
+    document.getElementById('chosen-ingredients').classList.toggle('hidden')
     printer('Cooking up your recipe!')
     this.displayVideo();
 
@@ -93,23 +92,23 @@ export default class Game {
   }
 
   displayVideo() {
+    document.getElementById('tray').classList.toggle('hidden')
     const videoWrapper = document.getElementById('videowrapper')
     videoWrapper.classList.toggle('hidden')
     setTimeout(() => {
       videoWrapper.classList.toggle('hidden')
     }, 8000)
   }
-
+  
   showCompletedMeal() {
-    // let ingrUl = document.getElementById('chosen-ingredients');
-    // let trayDiv = document.getElementById('tray');
-    // trayDiv.removeChild(document.getElementById('tray-pic'));
-    // const trayPic = document.createElement('img');
-    // trayDiv.removeChild(ingrUl);
-    // trayPic.setAttribute('src', 'images/sheet_pan.PNG');
-    // trayPic.setAttribute('id', 'tray-pic');
-    // trayDiv.appendChild(trayPic);
-
+    let ingrUl = document.getElementById('chosen-ingredients');
+    let trayDiv = document.getElementById('tray');
+    trayDiv.removeChild(document.getElementById('tray-pic'));
+    const trayPic = document.createElement('img');
+    trayDiv.removeChild(ingrUl);
+    trayPic.setAttribute('src', 'images/sheet_pan.PNG');
+    trayPic.setAttribute('id', 'tray-pic');
+    trayDiv.appendChild(trayPic);
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
     if (protein.name === 'Pork') {
       trayPic.setAttribute('src', 'images/completed_pork.png');
@@ -118,6 +117,7 @@ export default class Game {
     } else if (protein.name === 'Beef') {
       trayPic.setAttribute('src', 'images/completed_beef.png');
     }
+    trayDiv.classList.toggle('hidden')
     trayPic.setAttribute('class', 'completed')
   }
 

@@ -190,6 +190,10 @@ input:checked + .slider:before {
   font-size: 32px;
 }
 
+#message.clickable {
+  cursor: pointer;
+}
+
 ul#veggieList, ul#proteinList {
   display: flex;
   list-style: none;
@@ -357,12 +361,12 @@ li.chosen {
 }
 
 #game-and-instructions-container {
-  height: 75vh;
+  height: fit-content;
 }
 
 #videowrapper {
   position: relative;
-  left: 36%;
+  left: 40%;
   transform: translateY(-150%);
   height: 400px;
   width: 400px;
@@ -387,8 +391,8 @@ li.chosen {
   margin-bottom: 10px;
 }
 
-.ingredient:last-of-type {
-  padding-bottom: 20px;
+.buffer {
+  height: 20px;
 }
 
 .instructions {
@@ -396,5 +400,5 @@ li.chosen {
 }
 
 .thanks {
-  padding-top: 20px;
+  padding-top: 40px;
 }

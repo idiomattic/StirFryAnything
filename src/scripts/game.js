@@ -42,6 +42,7 @@ export default class Game {
     setTimeout(function(){
       printer('Click here to advance when ready.');
       let advanceMessage = document.getElementById('message')
+      advanceMessage.classList.toggle('clickable')
       advanceMessage.addEventListener('click', Game.prototype.enterLevel2.bind(this))
     }.bind(this), 5000)
     const container = document.getElementById('game-container');
@@ -69,6 +70,8 @@ export default class Game {
   
   
   enterLevel2() {
+    let advanceMessage = document.getElementById('message')
+    advanceMessage.classList.toggle('clickable')
     const chosenIngredients = document.getElementById('chosen-ingredients');
     if (chosenIngredients.getElementsByTagName('li').length > 1) {
       Game.prototype.removeLists();
@@ -167,6 +170,12 @@ export default class Game {
         modalBody.appendChild(ingrItem);
       }
     })
+
+    let buffer = document.createElement('li')
+    buffer.setAttribute('class', 'buffer')
+    buffer.innerHTML = ''
+    modalBody.appendChild(buffer)
+    
     if (chosenProtein) {
       modalBody.appendChild(prepProteinStep)
       modalBody.appendChild(marinadeStep)

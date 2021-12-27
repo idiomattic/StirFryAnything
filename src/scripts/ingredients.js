@@ -19,7 +19,7 @@ export const INGREDIENTS = [
   new Ingredient('Garlic', 'Vegetable', '3 Cloves Garlic, minced', 'Raw', 'images/raw_garlic.PNG', 'images/prepped_garlic.PNG'),
   new Ingredient('Ginger', 'Vegetable', '1 inch Ginger, minced', 'Raw', 'images/raw_ginger.PNG', 'images/prepped_ginger.PNG'),
   new Ingredient('Pork', 'Protein', '0.5lbs Lean Pork, cut into slivers', 'Raw', 'images/raw_pork.PNG', 'images/prepped_pork.PNG'),
-  new Ingredient('Red Onion', 'Vegetable', '1/4 Red Onion or a Small Shallot, cut into slivers', 'Raw', 'images/raw_red_onion.PNG', 'images/prepped_red_onion.PNG'),
+  new Ingredient('Onion', 'Vegetable', '1/4 Red Onion or a Small Shallot, cut into slivers', 'Raw', 'images/raw_red_onion.PNG', 'images/prepped_red_onion.PNG'),
   new Ingredient('Scallion', 'Vegetable', '3 Scallion Whites, cut into 1 inch sections', 'Raw', 'images/raw_scallion.PNG', 'images/prepped_scallion.PNG'),
   new Ingredient('Snap Peas', 'Vegetable', 'Handful of Snap Peas, trimmed and cut in half diagonally', 'Raw', 'images/raw_snap_peas.PNG', 'images/prepped_snap_peas.PNG')  
 ]

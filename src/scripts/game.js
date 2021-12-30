@@ -405,7 +405,7 @@ export default class Game {
       printer('Something went wrong.  Apologies');
       setTimeout(this.startGame(), 5000)
     }
-    console.log(ingrInst)
+    // console.log(ingrInst)
     ingrInst.state = 'Prepped';
     let newUrl = ingrInst.prepped_img_link;
     e.target.setAttribute('src', newUrl);

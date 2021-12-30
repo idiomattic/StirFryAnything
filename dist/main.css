@@ -1,4 +1,15 @@
-@font-face{font-family:"renogare";src:url(../fonts/Renogare-Regular.otf);font-style:normal;font-weight:100}img{background-color:transparent}body{margin:0}#name{margin:0}h1{margin-bottom:10px}h1,h3{text-align:center}h1{font-family:renogare;font-weight:100}h3{font-family:renogare;font-weight:40}#game-canvas{background-color:#000;padding:0;margin-left:auto;margin-right:auto;display:block}#game-container{left:50%;transform:translate(-50%);width:fit-content;height:fit-content;position:relative}ul#veggieList,ul#proteinList{display:flex;list-style:none;position:absolute;left:50%;transform:translate(-50%)}ul#proteinList{top:27%}ul#veggieList{top:40%}#proteinList li,#veggieList li{width:100px;height:auto;flex:auto;background-color:transparent;top:30%}li>img{max-width:100%;max-height:100%}#tray-pic{width:300px;height:auto}#tray{width:fit-content;height:fit-content;display:flex;background-color:transparent;position:absolute;right:50%;bottom:20%;transform:translate(50%, 50%)}#chosen-ingredients{display:flex;list-style:none;position:absolute;column-count:auto}#chosen-ingredients li{display:inline-block;width:40px;height:auto;flex:auto;background-color:transparent}#message{top:23%;left:50%;position:absolute;transform:translate(-50%, -50%);background-color:transparent;color:#fff;font-family:renogare;font-weight:40;font-size:20px}#subMessage{top:50%;left:50%;position:absolute;transform:translate(-50%, -50%);background-color:transparent;color:#fff;font-family:renogare;font-weight:40;font-size:20px}#board-div{width:600px;height:auto;display:flex;background-color:transparent;position:absolute;right:52%;bottom:50%;transform:translate(50%, 50%)}#board{width:600px;height:auto;position:relative}#board-list{padding:0;margin:0;list-style:none;width:min-content;height:min-content;position:absolute;left:55%;top:60%;transform:translate(-50%, -50%)}#board-list>li{width:min-content;height:auto}li.chosen{height:auto}.modal{border:#f0f8ff 5px solid;font-family:renogare;position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;z-index:15;background-color:#fff;width:800px;max-width:80%}.modal-header{padding:10px 15px;display:flex;justify-content:space-between;align-items:center}.modal-header .title{font-weight:40;font-size:20px}.modal-body{padding:10px 15px;list-style:none;font-weight:20;font-size:16px}.completed{left:50%;top:50%;transform:translate(0%, -50%)}#videowrapper{left:50%;top:50%;transform:translate(-50%, -50%);position:relative;padding-bottom:50%;padding-top:25px;height:min-content;width:auto;z-index:15}#vid{position:absolute;left:0px;top:0px;right:0px;bottom:0px;height:100%;width:100%}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+@font-face {
+  font-family: "renogare";
+  src: url(../fonts/Renogare-Regular.otf);
+  font-style: normal;
+  font-weight: 100;
+}
+img {
+  background-color: transparent;
+}
 
 body {
   margin: 0;

@@ -190,7 +190,7 @@ input:checked + .slider:before {
   font-size: 32px;
 }
 
-#message.clickable {
+.clickable {
   cursor: pointer;
 }
 

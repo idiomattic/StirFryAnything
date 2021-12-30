@@ -298,6 +298,7 @@ export default class Game {
     container.appendChild(veggieList);
     vegetables.forEach((veggie) => {
       let veggieEl = document.createElement('li');
+      veggieEl.classList.toggle('clickable')
       veggieEl.setAttribute('class', `${veggie.category}`)
       veggieEl.setAttribute('id', `${veggie.name}`);
       let veggieImg = document.createElement('img');
@@ -313,6 +314,7 @@ export default class Game {
     if (!this.vegMode) {
       proteins.forEach((protein) => {
         let proteinEl = document.createElement('li');
+        proteinEl.classList.toggle('clickable')
         proteinEl.setAttribute('class', `${protein.category}`)
         proteinEl.setAttribute('id', `${protein.name}`);
         let proteinImg = document.createElement('img');

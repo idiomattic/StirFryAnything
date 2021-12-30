@@ -1,3 +1,393 @@
 @font-face{font-family:"renogare";src:url(../fonts/Renogare-Regular.otf);font-style:normal;font-weight:100}img{background-color:transparent}body{margin:0}#name{margin:0}h1{margin-bottom:10px}h1,h3{text-align:center}h1{font-family:renogare;font-weight:100}h3{font-family:renogare;font-weight:40}#game-canvas{background-color:#000;padding:0;margin-left:auto;margin-right:auto;display:block}#game-container{left:50%;transform:translate(-50%);width:fit-content;height:fit-content;position:relative}ul#veggieList,ul#proteinList{display:flex;list-style:none;position:absolute;left:50%;transform:translate(-50%)}ul#proteinList{top:27%}ul#veggieList{top:40%}#proteinList li,#veggieList li{width:100px;height:auto;flex:auto;background-color:transparent;top:30%}li>img{max-width:100%;max-height:100%}#tray-pic{width:300px;height:auto}#tray{width:fit-content;height:fit-content;display:flex;background-color:transparent;position:absolute;right:50%;bottom:20%;transform:translate(50%, 50%)}#chosen-ingredients{display:flex;list-style:none;position:absolute;column-count:auto}#chosen-ingredients li{display:inline-block;width:40px;height:auto;flex:auto;background-color:transparent}#message{top:23%;left:50%;position:absolute;transform:translate(-50%, -50%);background-color:transparent;color:#fff;font-family:renogare;font-weight:40;font-size:20px}#subMessage{top:50%;left:50%;position:absolute;transform:translate(-50%, -50%);background-color:transparent;color:#fff;font-family:renogare;font-weight:40;font-size:20px}#board-div{width:600px;height:auto;display:flex;background-color:transparent;position:absolute;right:52%;bottom:50%;transform:translate(50%, 50%)}#board{width:600px;height:auto;position:relative}#board-list{padding:0;margin:0;list-style:none;width:min-content;height:min-content;position:absolute;left:55%;top:60%;transform:translate(-50%, -50%)}#board-list>li{width:min-content;height:auto}li.chosen{height:auto}.modal{border:#f0f8ff 5px solid;font-family:renogare;position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;z-index:15;background-color:#fff;width:800px;max-width:80%}.modal-header{padding:10px 15px;display:flex;justify-content:space-between;align-items:center}.modal-header .title{font-weight:40;font-size:20px}.modal-body{padding:10px 15px;list-style:none;font-weight:20;font-size:16px}.completed{left:50%;top:50%;transform:translate(0%, -50%)}#videowrapper{left:50%;top:50%;transform:translate(-50%, -50%);position:relative;padding-bottom:50%;padding-top:25px;height:min-content;width:auto;z-index:15}#vid{position:absolute;left:0px;top:0px;right:0px;bottom:0px;height:100%;width:100%}
 
-/*# sourceMappingURL=main.css.map*/
+body {
+  margin: 0;
+}
+
+#name {
+  margin: 20px 0 0 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+h1, h3 {
+  text-align: center;
+}
+
+h1 {
+  font-family: renogare;
+  font-weight: 100;
+}
+
+h3 {
+  font-family: renogare;
+  font-weight: 40;
+}
+
+div.options-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-200px);
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+div.options-container > h3.middot {
+  margin: 0 20px;
+}
+
+div.options-container > h3 {
+  margin: 0;
+}
+
+.switch {
+  margin-left: 10px;
+  font-family: renogare;
+  font-weight: 40;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#instructions {
+  cursor: pointer;
+}
+
+#game-canvas {
+  background-color: black;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#game-container {
+  left: 50%;
+  transform: translate(-50%);
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+#instructions-modal-background.hidden, #instructions-modal-background.hidden > #instructions-modal-child {
+  display: none;
+}
+
+#instructions-modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.95);
+  background: transparent;
+  z-index: 100;
+}
+
+#instructions-modal-child {
+  position: absolute;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 44px 56px;
+  width: 700px;
+  border-radius: 10px;
+}
+
+#instructions-list {
+  padding: 0;
+  list-style: none;
+  font-family: renogare;
+  font-weight: 40;
+}
+
+#instructions-list > li:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+#instructions-list > li > p {
+  font-size: 14px;
+}
+
+#close-button:hover {
+  cursor: pointer;
+}
+
+#close-button {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  font-size: 32px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+ul#veggieList, ul#proteinList {
+  display: flex;
+  list-style: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+ul#proteinList {
+  top: 27%;
+}
+
+ul#veggieList {
+  top: 40%;
+}
+
+#proteinList li, #veggieList li {
+  width: 100px;
+  height: auto;
+  flex: auto;
+  background-color: transparent;
+  top: 30%;
+}
+
+li > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#tray-pic {
+  width: 300px;
+  height: auto;
+}
+
+#tray {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  background-color: transparent;
+  position: absolute;
+  right: 50%;
+  bottom: 20%;
+  transform: translate(50%, 50%);
+}
+
+#chosen-ingredients {
+  padding-left: 30px;
+  display: flex;
+  list-style: none;
+  position: absolute;
+  column-count: auto;
+}
+
+#chosen-ingredients li {
+  display: inline-block;
+  width: 40px;
+  height: auto;
+  flex: auto;
+  background-color: transparent;
+}
+
+#message {
+  top: 23%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  color: white;
+  font-family: renogare;
+  font-weight: 40;
+  font-size: 20px;
+}
+
+#subMessage {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  color: white;
+  font-family: renogare;
+  font-weight: 40;
+  font-size: 20px;
+}
+
+#board-div {
+  width: 600px;
+  height: auto;
+  display: flex;
+  background-color: transparent;
+  position: absolute;
+  right: 52%;
+  bottom: 50%;
+  transform: translate(50%, 50%);
+}
+
+#board {
+  width: 600px;
+  height: auto;
+  position: relative;
+}
+
+#board-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: min-content;
+  height: min-content;
+  position: absolute;
+  left: 55%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+}
+
+#board-list > li {
+  width: min-content;
+  height: auto;
+}
+
+li.chosen {
+  height: auto;
+}
+
+.modal {
+  border: aliceblue 5px solid;
+  font-family: renogare;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  z-index: 15;
+  background-color: white;
+  width: 800px;
+  max-width: 80%;
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header .title {
+  font-weight: 40;
+  font-size: 20px;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  list-style: none;
+  font-weight: 20;
+  font-size: 16px;
+}
+
+.completed {
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.hidden, .hidden * {
+  display: none;
+}
+
+#game-and-instructions-container {
+  height: fit-content;
+}
+
+#videowrapper {
+  position: relative;
+  left: 40%;
+  transform: translateY(-150%);
+  height: 400px;
+  width: 400px;
+  z-index: 15;
+}
+
+#video {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+#gif {
+  width: 400px;
+}
+
+.ingredient {
+  margin-bottom: 10px;
+}
+
+.buffer {
+  height: 20px;
+}
+
+.instructions {
+  margin-top: 10px;
+}
+
+.thanks {
+  padding-top: 40px;
+}

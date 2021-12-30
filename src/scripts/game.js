@@ -6,8 +6,11 @@ export default class Game {
   constructor(canvas, context) {
     this.canvas = canvas;
     this.ctx = context;
+    this.vegMode = false
     this.startGame();
     this.ingredientsArr = [];
+    this.ingredientsCount = 0
+    this.proteinChosen = false
   }
 
   startGame() {
@@ -15,6 +18,12 @@ export default class Game {
     let hello = printer('Press Enter to Begin')
     hello.style.top = "50%";
     this.level = 1;
+
+    const vegModeSwitch = document.getElementById('veg-mode')
+    vegModeSwitch.addEventListener('change', e => {
+      this.vegMode = !this.vegMode
+    })
+
     window.addEventListener('keypress', (key) => {
       if (key.key === "Enter") {
         this.level1();
@@ -27,14 +36,15 @@ export default class Game {
   }
 
   level1() {
-    if (this.level !== 1) { this.startGame() };
-    printer('Click ingredients to add them to your tray');
-    setTimeout(function(){printer('and click again to remove them.')}, 5000)
+    document.getElementById('checkbox').disabled = true
+    if (this.level !== 1) { this.startGame() }
+    printer('')
     setTimeout(function(){
       printer('Click here to advance when ready.');
       let advanceMessage = document.getElementById('message')
+      advanceMessage.classList.toggle('clickable')
       advanceMessage.addEventListener('click', Game.prototype.enterLevel2.bind(this))
-    }.bind(this), 12000)
+    }.bind(this), 5000)
     const container = document.getElementById('game-container');
     this.buildTray(container)
     let lists = this.buildLists(container);
@@ -43,23 +53,25 @@ export default class Game {
   level2() {
     this.level++;
     if (this.level !== 2) { this.startGame() };
-    printer('Choose ingredients from your tray to begin preparing')
-    setTimeout(function(){printer('then drag your cursor across to cut them.')}, 5000)
+    printer('')
   }
   
   level3() {
     this.level++;
-    if (this.level !== 3) { this.startGame() };
-    document.getElementById('game-container').removeChild(document.getElementById('videowrapper'));
-    this.showCompletedMeal();
+    if (this.level !== 3) { this.startGame() }
     printer('')
-
-    setTimeout(this.renderRecipe.bind(this), 5000)
-    // debugger
+    if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
+      this.showCompletedMeal();
+      setTimeout(this.renderRecipe.bind(this), 3000)
+    } else {
+      setTimeout(this.renderRecipe.bind(this), 1000)
+    }
   }
   
   
   enterLevel2() {
+    let advanceMessage = document.getElementById('message')
+    advanceMessage.classList.toggle('clickable')
     const chosenIngredients = document.getElementById('chosen-ingredients');
     if (chosenIngredients.getElementsByTagName('li').length > 1) {
       Game.prototype.removeLists();
@@ -71,27 +83,22 @@ export default class Game {
   }
   
   enterLevel3() {
+    document.getElementById('chosen-ingredients').classList.toggle('hidden')
     printer('Cooking up your recipe!')
+    printer2('')
     this.displayVideo();
-
-    setTimeout(this.level3.bind(this), 10000);
-    // this.level3();
   }
-
+  
   displayVideo() {
-    let videoWrapper = document.createElement('div')
-    videoWrapper.setAttribute('id', 'videowrapper');
-    let vid = document.createElement('iframe');
-    vid.setAttribute('id', 'vid')
-    vid.setAttribute('src', 'https://www.youtube.com/embed/dYYr3zejRIE')
-    vid.setAttribute('frameborder', '0')
-    videoWrapper.appendChild(vid);
-    document.getElementById('game-container').appendChild(videoWrapper);
-    // setTimeout(() => {
-    //   document.getElementById('game-container').removeChild(videoWrapper);
-    // }, 9000)
+    document.getElementById('tray').classList.toggle('hidden')
+    const videoWrapper = document.getElementById('videowrapper')
+    videoWrapper.classList.toggle('hidden')
+    setTimeout(() => {
+      videoWrapper.classList.toggle('hidden')
+      setTimeout(this.level3.bind(this), 100);
+    }, 8000)
   }
-
+  
   showCompletedMeal() {
     let ingrUl = document.getElementById('chosen-ingredients');
     let trayDiv = document.getElementById('tray');
@@ -101,7 +108,6 @@ export default class Game {
     trayPic.setAttribute('src', 'images/sheet_pan.PNG');
     trayPic.setAttribute('id', 'tray-pic');
     trayDiv.appendChild(trayPic);
-
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
     if (protein.name === 'Pork') {
       trayPic.setAttribute('src', 'images/completed_pork.png');
@@ -110,14 +116,12 @@ export default class Game {
     } else if (protein.name === 'Beef') {
       trayPic.setAttribute('src', 'images/completed_beef.png');
     }
+    trayDiv.classList.toggle('hidden')
     trayPic.setAttribute('class', 'completed')
-    // setTimeout(() => {
-    //   document.getElementById('tray').removeChild(trayPic);
-    // }, 5000)
   }
 
   renderRecipe() {
-    printer('Thank you for playing!')
+    // printer('Thank you for playing!')
     const recipeModal = document.createElement('div');
     recipeModal.setAttribute('class', 'modal');
     recipeModal.setAttribute('id', 'modal');
@@ -130,39 +134,97 @@ export default class Game {
     let mainVegetables = this.ingredientsArr.filter(ingr => ingr.category === 'Vegetable').filter(ingr => ingr.name !== 'Ginger' && ingr.name !== 'Garlic');
     let vegNames = [];
     mainVegetables.forEach(veg => vegNames.push(veg.name));
+    let marinade
+    let prepProteinStep = document.createElement('li')
+    let marinadeStep = document.createElement('li')
+    prepProteinStep.setAttribute('class', 'instructions');
+    marinadeStep.setAttribute('class', 'instructions');
     if (chosenProtein) {
       title.innerHTML = `${chosenProtein.name} with ${vegNames.join(' and ')}`
+      prepProteinStep.innerHTML = `Trim and cut ${chosenProtein.name} accordingly.`
+      marinadeStep.innerHTML = `Mix ${chosenProtein.name} with marinade ingredients, oil last, and set aside.`
+      if (chosenProtein.name === 'Beef') {
+        marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp baking soda, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
+      } else {
+        marinade = '1/4tsp salt, 1/2tsp sugar, 1/2tsp corn starch, 1/2tsp Shaoxing cooking wine, 1/4tsp light soy sauce, 1/4tsp dark soy sauce (optional), 1/2tsp neutral oil'
+      }
     } else {
-      let veggies = this.recipeIngrs().join(', ');
+      let numVeggies = vegNames.length
+      let veggies = vegNames.slice(0, numVeggies - 1).join(', ') + ' and ' + vegNames.slice(numVeggies - 1).join('');
       title.innerHTML = `Stir Fried ${veggies}`
     }
-
-    // title.innerHTML = 'title'
     modalHeader.appendChild(title);
     const modalBody = document.createElement('ul');
     modalBody.setAttribute('class', 'modal-body');
 
     const ingrInfo = this.recipeIngrs();
-    ingrInfo.forEach((ingr) => {
+    ingrInfo.forEach(ingr => {
       let ingrItem = document.createElement('li');
       ingrItem.setAttribute('class', 'ingredient');
       ingrItem.innerHTML = ingr;
       modalBody.appendChild(ingrItem);
+      if (ingr.charAt(0) === '0') {
+        let ingrItem = document.createElement('li');
+        ingrItem.setAttribute('class', 'ingredient');
+        ingrItem.innerHTML = marinade;
+        modalBody.appendChild(ingrItem);
+      }
     })
+
+    let buffer = document.createElement('li')
+    buffer.setAttribute('class', 'buffer')
+    buffer.innerHTML = ''
+    modalBody.appendChild(buffer)
+    
+    if (chosenProtein) {
+      modalBody.appendChild(prepProteinStep)
+      modalBody.appendChild(marinadeStep)
+    }
+    let prepStep = document.createElement('li')
+    prepStep.setAttribute('class', 'instructions')
+    prepStep.innerHTML = 'Prep vegetables accordingly.  Stir 2 tsp of corn starch with 1 tbsp of cool water in a small bowl.'
+    modalBody.appendChild(prepStep)
+
+    let heating = document.createElement('li')
+    heating.setAttribute('class', 'instructions')
+    heating.innerHTML = 'Place wok over high heat until very hot.  Add 1-2tbsp oil to coat.  Heat until oil is shimmering.'
+    modalBody.appendChild(heating)
+
+    if (chosenProtein) {
+      let cookProtein = document.createElement('li')
+      cookProtein.setAttribute('class', 'instructions')
+      cookProtein.innerHTML = 'Add protein to the wok.  Stir or toss continuously.'
+      modalBody.appendChild(cookProtein)
+    }
+
+    let cookVeggies = document.createElement('li')
+    cookVeggies.setAttribute('class', 'instructions')
+    cookVeggies.innerHTML = 'Lower heat to medium.  Add additional oil if dry.  Add large vegetables and cook until desired doneness.'
+    modalBody.appendChild(cookVeggies)
+
+    let finish = document.createElement('li')
+    finish.setAttribute('class', 'instructions')
+    finish.innerHTML = 'Add garlic and/or ginger, if using.  Cook until fragrant.  Add a splash of light soy sauce, then cooking wine around the sides of the wok.'
+    modalBody.appendChild(finish)
+
+    let slurry = document.createElement('li')
+    slurry.setAttribute('class', 'instructions')
+    slurry.innerHTML = 'Stir your corn starch slurry and add to the wok, then toss to coat.'
+    modalBody.appendChild(slurry)
+
+    let thanks = document.createElement('li')
+    thanks.setAttribute('class', 'thanks')
+    thanks.innerHTML = 'Thank you for playing!'
+    modalBody.appendChild(thanks)
+
     recipeModal.appendChild(modalBody);
     document.getElementById('game-container').appendChild(recipeModal)
   }
 
   recipeIngrs() {
     const recipeInfo = [];
-    this.ingredientsArr.forEach((ingr) => {
-      if (ingr.name === 'Chicken') {
-        recipeInfo.push(`0.5lbs ${ingr.name}, Thigh Preferably`)
-      } else if (ingr.name === 'Pork' || ingr.name === 'Beef') {
-        recipeInfo.push(`0.5lbs Lean ${ingr.name}`)
-      } else if (ingr.category === 'Vegetable') {
-        recipeInfo.push(`2 ${ingr.name}`)
-      }
+    this.ingredientsArr.forEach(ingr => {
+      recipeInfo.push(`${ingr.description}`)
     })
     return recipeInfo;
   }
@@ -191,18 +253,39 @@ export default class Game {
       parent = document.getElementById('proteinList');
     }
     if (!eTarg.classList.contains('chosen')) {
-      parent.removeChild(eTarg);
-      eTarg.classList.toggle('chosen');
-      if (eTarg.classList.contains('Protein')) {
-        eTarg.style.width = '100px';
+      if ((eTarg.id === 'Garlic' || eTarg.id === 'Ginger') || this.ingredientsCount < 3) {
+        printer2('')
+        if (eTarg.classList.contains('Protein') && !this.proteinChosen) {
+          printer2('')
+          parent.removeChild(eTarg);
+          eTarg.classList.toggle('chosen');
+          this.proteinChosen = true
+          eTarg.style.width = '80px';
+          chosenList.appendChild(eTarg);
+          this.ingredientsArr.push(ingrInst[0]);
+          this.ingredientsCount++
+        } else if (eTarg.classList.contains('Vegetable')) {
+          printer2('')
+          parent.removeChild(eTarg);
+          eTarg.classList.toggle('chosen');
+          eTarg.style.width = '40px';
+          chosenList.appendChild(eTarg);
+          this.ingredientsArr.push(ingrInst[0]);
+          if (eTarg.id !== 'Garlic' && eTarg.id !== 'Ginger') {this.ingredientsCount++}
+        } else {
+          printer2('Too much protein', '65%')
+        }
       } else {
-        eTarg.style.width = '40px';
+        printer2('Too many ingredients', '65%')
       }
-      chosenList.appendChild(eTarg);
-      this.ingredientsArr.push(ingrInst[0]);
     } else {
+      if (eTarg.classList.contains('Protein')) {
+        this.proteinChosen = false
+      }
+      printer2('')
       chosenList.removeChild(eTarg);
       this.ingredientsArr.splice(this.ingredientsArr.indexOf(ingrInst), 1);
+      if (eTarg.id !== 'Garlic' && eTarg.id !== 'Ginger') {this.ingredientsCount--}
       eTarg.classList.toggle('chosen');
       eTarg.style.width = '100px';
       parent.appendChild(eTarg);
@@ -215,6 +298,7 @@ export default class Game {
     container.appendChild(veggieList);
     vegetables.forEach((veggie) => {
       let veggieEl = document.createElement('li');
+      veggieEl.classList.toggle('clickable')
       veggieEl.setAttribute('class', `${veggie.category}`)
       veggieEl.setAttribute('id', `${veggie.name}`);
       let veggieImg = document.createElement('img');
@@ -224,21 +308,23 @@ export default class Game {
       veggieEl.appendChild(veggieImg);
       veggieList.appendChild(veggieEl);
     })
-    
     let proteinList = document.createElement('ul');
     proteinList.setAttribute('id', 'proteinList');
     container.appendChild(proteinList);
-    proteins.forEach((protein) => {
-      let proteinEl = document.createElement('li');
-      proteinEl.setAttribute('class', `${protein.category}`)
-      proteinEl.setAttribute('id', `${protein.name}`);
-      let proteinImg = document.createElement('img');
-      proteinImg.setAttribute('src', `${protein.raw_img_link}`);
-      proteinImg.setAttribute('alt', `${protein.name}`);
-      proteinEl.onclick = this.togglePos.bind(this);
-      proteinEl.appendChild(proteinImg);
-      proteinList.appendChild(proteinEl);
-    })
+    if (!this.vegMode) {
+      proteins.forEach((protein) => {
+        let proteinEl = document.createElement('li');
+        proteinEl.classList.toggle('clickable')
+        proteinEl.setAttribute('class', `${protein.category}`)
+        proteinEl.setAttribute('id', `${protein.name}`);
+        let proteinImg = document.createElement('img');
+        proteinImg.setAttribute('src', `${protein.raw_img_link}`);
+        proteinImg.setAttribute('alt', `${protein.name}`);
+        proteinEl.onclick = this.togglePos.bind(this);
+        proteinEl.appendChild(proteinImg);
+        proteinList.appendChild(proteinEl);
+      })
+    }
     return [veggieList, proteinList];
   }
 
@@ -295,22 +381,10 @@ export default class Game {
       }
       let that = this;
       eTarg.onmouseover = function(e) {
-        // debugger
         e.currentTarget.onmouseout = Game.prototype.prepareIngredient.bind(that);
       }
       boardList.appendChild(eTarg);
-    } 
-    // else if (eTarg.classList.contains('onboard')) {
-    //   boardList.removeChild(eTarg);
-    //   eTarg.onmouseover = null;
-    //   eTarg.classList.toggle('onboard');
-    //   if (eTarg.classList.contains('Protein')) {
-    //     eTarg.style.width = '100px';
-    //   } else {
-    //     eTarg.style.width = '40px';
-    //   }
-    //   chosenList.appendChild(eTarg);
-    // }
+    }
   }
 
   prepareIngredient(e) {
@@ -331,6 +405,7 @@ export default class Game {
       printer('Something went wrong.  Apologies');
       setTimeout(this.startGame(), 5000)
     }
+    console.log(ingrInst)
     ingrInst.state = 'Prepped';
     let newUrl = ingrInst.prepped_img_link;
     e.target.setAttribute('src', newUrl);
@@ -352,7 +427,6 @@ export default class Game {
         setTimeout(() => {
           this.removeBoard();
           printer('');
-          // printer2('Get ready to stir fry!', '50%', '50%');
           this.enterLevel3();
         }, 2000)
       }

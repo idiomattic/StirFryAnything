@@ -12,6 +12,8 @@ export function printer(message) {
 
 export function printer2(message, top, left) {
   const container = document.getElementById('game-container');
+  let existingMessage = document.querySelector('#subMessage');
+  if (existingMessage) {existingMessage.remove()}
   let subMessage = document.createElement('div');
   subMessage.setAttribute('id', 'subMessage');
   subMessage.innerHTML = message;

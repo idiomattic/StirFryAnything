@@ -33,8 +33,6 @@ export default class Star {
     ctx.beginPath();
     ctx.fillStyle = '#' + `${this.color}`
     ctx.fillRect(this.x, this.y, this.size, this.size);
-    // console.log(`x: ${this.x}`)
-    // console.log(`y: ${this.y}`)
   }
   
   generateStarPosish() {

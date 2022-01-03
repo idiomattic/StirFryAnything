@@ -72,7 +72,7 @@ export default class Game {
     printer('')
     if (this.ingredientsArr.filter(ingr => ingr.category === 'Protein').length > 0) {
       this.showCompletedMeal();
-      setTimeout(this.renderRecipe.bind(this), 3000)
+      setTimeout(this.renderRecipe.bind(this), 5000)
     } else {
       setTimeout(this.renderRecipe.bind(this), 1000)
     }
@@ -390,9 +390,10 @@ export default class Game {
         eTarg.style.width = '90px';
       }
       let that = this;
-      eTarg.onmouseover = function(e) {
+      setTimeout(eTarg.onmouseover = function(e) {
         e.currentTarget.onmouseout = Game.prototype.prepareIngredient.bind(that);
-      }
+      }, 1000)
+      
       boardList.appendChild(eTarg);
     }
   }

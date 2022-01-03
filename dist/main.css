@@ -42,7 +42,7 @@ div.options-container {
   align-items: center;
   position: relative;
   left: 50%;
-  transform: translateX(-200px);
+  transform: translateX(-250px);
   margin-bottom: 10px;
   width: fit-content;
 }
@@ -370,7 +370,7 @@ li.chosen {
 
 #videowrapper {
   position: relative;
-  left: 41%;
+  left: 37%;
   transform: translateY(-150%);
   height: 400px;
   width: 400px;

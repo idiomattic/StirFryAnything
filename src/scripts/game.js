@@ -24,12 +24,22 @@ export default class Game {
       this.vegMode = !this.vegMode
     })
 
+    // const restartButton = document.getElementById('restart')
+    // restartButton.addEventListener('click', e => {
+    //   this.restart()
+    // })
+
     window.addEventListener('keypress', (key) => {
       if (key.key === "Enter") {
         this.level1();
       }
     }, false)
   }
+
+  // restart() {
+    
+  //   this.startGame()
+  // }
   
   render() {
     Star.render.bind(this)();

@@ -115,16 +115,16 @@ export default class Game {
     trayDiv.removeChild(document.getElementById('tray-pic'));
     const trayPic = document.createElement('img');
     trayDiv.removeChild(ingrUl);
-    trayPic.setAttribute('src', 'images/sheet_pan.PNG');
+    trayPic.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641238007/sheet_pan_ty7kze.png');
     trayPic.setAttribute('id', 'tray-pic');
     trayDiv.appendChild(trayPic);
     let protein = this.ingredientsArr.filter(ingr => ingr.category === 'Protein')[0];
     if (protein.name === 'Pork') {
-      trayPic.setAttribute('src', 'images/completed_pork.png');
+      trayPic.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641238015/completed_pork_k0wwlp.png');
     } else if (protein.name === 'Chicken') {
-      trayPic.setAttribute('src', 'images/completed_chicken.png');
+      trayPic.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641238023/completed_chicken_sgos8p.png');
     } else if (protein.name === 'Beef') {
-      trayPic.setAttribute('src', 'images/completed_beef.png');
+      trayPic.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641238011/completed_beef_rjgkkc.png');
     }
     trayDiv.classList.toggle('hidden')
     trayPic.setAttribute('class', 'completed')
@@ -243,7 +243,7 @@ export default class Game {
     const trayDiv = document.createElement('div');
     trayDiv.setAttribute('id', 'tray');
     const trayPic = document.createElement('img');
-    trayPic.setAttribute('src', 'images/sheet_pan.PNG');
+    trayPic.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641238007/sheet_pan_ty7kze.png');
     trayPic.setAttribute('id', 'tray-pic');
     trayDiv.appendChild(trayPic);
     const chosenIngredients = document.createElement('ul');
@@ -359,10 +359,10 @@ export default class Game {
     container.appendChild(boardDiv);
     boardDiv.setAttribute('id', 'board-div')
     let boardImg = document.createElement('img');
-    boardImg.setAttribute('src', 'images/cutting_board.png');
+    boardImg.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641237999/cutting_board_ok0jg8.png');
     boardImg.setAttribute('alt', 'cutting board');
     const boardPic = document.createElement('img');
-    boardPic.setAttribute('src', 'images/cutting_board.png')
+    boardPic.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641237999/cutting_board_ok0jg8.png')
     boardPic.setAttribute('id', 'board');
     boardDiv.appendChild(boardPic);
     const boardList = document.createElement('ul');
@@ -401,7 +401,7 @@ export default class Game {
     e.currentTarget.onmouseover = null;
     e.currentTarget.onmouseout = null;
     const boardList = document.getElementById('board-list');
-    e.target.setAttribute('src', 'images/explosion.png');
+    e.target.setAttribute('src', 'https://res.cloudinary.com/dsumtpkns/image/upload/v1641237997/explosion_w17lwm.png');
     e.target.style.width = '200px'
     setTimeout(Game.prototype.swapImage.bind(this, e), 1500)
   }
